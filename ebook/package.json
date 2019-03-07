@@ -1,8 +1,8 @@
 {
-  "name": "ebook_wxm",
+  "name": "ebook",
   "version": "1.0.0",
-  "description": "SE228 project.",
-  "author": "516015910018Wei_Xiao_Miao",
+  "description": "SE228 project",
+  "author": "516015910018_WXM",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,6 +14,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.6.1",
+    "iview": "^3.3.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

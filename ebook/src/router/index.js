@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+
+Vue.use(Router)
+function loadView (view) {
+  return () => import(/* webpackChunkName: "view-[request]" */ `../components/${view}.vue`)
+}
 
 Vue.use(Router)
 
@@ -8,8 +12,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      component: loadView('user/layout'),
+      children: [
+        {
+          path: '',
+          name: 'homepage',
+          component: loadView('user/display/homepage')
+        },
+        {
+          path: 'book_detail/:id',
+          name: 'book',
+          component: loadView('user/display/book_detail')
+        }
+      ]
     }
   ]
 })

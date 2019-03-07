@@ -1,6 +1,6 @@
-# ebook_wxm
+# ebook
 
-> SE228 project.
+> SE228 project
 
 ## Build Setup
 
