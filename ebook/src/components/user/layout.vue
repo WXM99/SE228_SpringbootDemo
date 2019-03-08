@@ -83,25 +83,37 @@
             <Icon type="ios-person" size="large" />
             <span>Username</span>
           </MenuItem>
+          <router-link to="/">
+          <MenuItem name="1-0">
+            <Icon type="md-home" />
+            <span>主页</span>
+          </MenuItem>
+          </router-link>
           <MenuItem name="1-2">
-            <Icon type="ios-search"></Icon>
+            <Icon type="md-log-out" />
             <span>出售图书</span>
             </MenuItem>
+          <router-link to="market">
           <MenuItem name="1-3">
-            <Icon type="ios-settings"></Icon>
-            <span>分类查找</span>
+            <Icon type="md-apps" />
+            <span>分类浏览</span>
             </MenuItem>
+          </router-link>
           <MenuItem name="1-4">
-            <Icon type="ios-settings"></Icon>
+            <Icon type="md-cart" />
             <span>购物车</span>
           </MenuItem>
           <MenuItem name="1-5">
-            <Icon type="ios-settings"></Icon>
+            <Icon type="md-albums" />
             <span>收藏夹</span>
           </MenuItem>
           <MenuItem name="1-6">
-            <Icon type="ios-settings"></Icon>
+            <Icon type="md-list" />
             <span>交易记录</span>
+          </MenuItem>
+          <MenuItem name="1-7">
+            <Icon type="ios-settings"></Icon>
+            <span>个人中心</span>
           </MenuItem>
         </Menu>
       </Sider>
@@ -109,8 +121,8 @@
         <Header :style="{padding: 0}" class="layout-header-bar">
           <Row>
             <Col span="2"><Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon></Col>
-            <Col span="19"><h1>ebook 在线图书交易平台</h1></Col>
-            <Col span="3" style="height: 50px">
+            <Col span="17"><h1>ebook 在线图书交易平台</h1></Col>
+            <Col span="5" style="height: 50px">
               <el-switch
                 v-model="isDark"
                 @change="changeTheme"
@@ -157,45 +169,6 @@ export default {
     },
     changeTheme () {
       console.log(this.isDark)
-      let bkg = document.querySelector('#app > div > div > div.ivu-layout')
-      let menubk = document.querySelector('#app > div > div')
-      let app = document.querySelector('#app')
-      let prop1 = document.querySelector('#app > div > div > div.ivu-layout > div:nth-child(2) > div:nth-child(2) > span')
-      let prop2 = document.querySelector('#app > div > div > div.ivu-layout > div:nth-child(2) > div:nth-child(4) > span')
-      let prop3 = document.querySelector('#app > div > div > div.ivu-layout > div:nth-child(2) > div:nth-child(6) > span')
-      let prop4 = document.querySelector('#app > div > div > div.ivu-layout > div:nth-child(2) > div:nth-child(8) > span')
-      let menu = document.querySelector('.ivu-menu')
-      let sider = document.querySelector('.ivu-layout-sider')
-      let item = document.querySelector('#app > div > div > div.ivu-layout-sider > div.ivu-layout-sider-children > ul')
-      let top = document.querySelector('.ivu-layout-header')
-      let daytime = document.querySelector('div > div > div.ivu-layout > div.layout-header-bar.ivu-layout-header > div > div.ivu-col.ivu-col-span-3 > div > span.el-switch__label.el-switch__label--left > span')
-      if (this.isDark === true) {
-        bkg.style.backgroundColor = '#17233d'
-        top.style.backgroundColor = '#283d6b'
-        app.style.color = '#ffffff'
-        prop1.style.color = '#ffffff'
-        prop2.style.color = '#ffffff'
-        prop3.style.color = '#ffffff'
-        prop4.style.color = '#ffffff'
-        menu.style.color = '#ffffff'
-        daytime.style.color = '#ffffff'
-        item.style.backgroundColor = '#464f76'
-        menubk.style.backgroundColor = '#464f76'
-        sider.style.backgroundColor = '#464f76'
-      } else {
-        bkg.style.backgroundColor = '#f5f7f9'
-        top.style.backgroundColor = '#f5f7f9'
-        app.style.color = '#17233d'
-        prop1.style.color = '#17233d'
-        prop2.style.color = '#17233d'
-        prop3.style.color = '#17233d'
-        prop4.style.color = '#17233d'
-        menu.style.color = '#17233d'
-        daytime.style.color = '#464f76'
-        item.style.backgroundColor = '#ffffff'
-        menubk.style.backgroundColor = '#ffffff'
-        sider.style.backgroundColor = '#ffffff'
-      }
     }
   }
 }

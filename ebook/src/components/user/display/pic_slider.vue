@@ -1,20 +1,9 @@
 <template>
   <Carousel autoplay v-model="value2" loop :height="300">
-    <CarouselItem>
+    <CarouselItem v-for="pic in this.books" :key="pic.id">
       <div class="demo-carousel">
-        <img class='slider-pic' :src='this.pics[0]'/>123</div>
-    </CarouselItem>
-    <CarouselItem>
-      <div class="demo-carousel">
-        <img class='slider-pic' :src='this.pics[1]'/></div>
-    </CarouselItem>
-    <CarouselItem>
-      <div class="demo-carousel">
-        <img class='slider-pic' :src='this.pics[2]'/></div>
-    </CarouselItem>
-    <CarouselItem>
-      <div class="demo-carousel">
-        <img class='slider-pic' :src='this.pics[3]'/></div>
+        <img class='slider-pic' :src="pic.pic" @click="viewBook(pic.id)"/>
+      </div>
     </CarouselItem>
   </Carousel>
 </template>
@@ -23,12 +12,42 @@ export default {
   data () {
     return {
       value2: 0,
-      pics: [
-        'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
-        'https://img1.doubanio.com/view/subject/l/public/s30019177.jpg',
-        'https://img3.doubanio.com/view/subject/l/public/s29984241.jpg',
-        'https://img3.doubanio.com/view/subject/l/public/s29992106.jpg'
+      books: [
+        {
+          name: '13',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          id: 1
+        },
+        {
+          name: '13',
+          pic: 'https://img1.doubanio.com/view/subject/l/public/s30019177.jpg',
+          id: 1
+        },
+        {
+          name: '13',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29984241.jpg',
+          id: 1
+        },
+        {
+          name: '13',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29992106.jpg',
+          id: 1
+        }
       ]
+    }
+  },
+  methods: {
+    methods: {
+      viewBook (id) {
+        console.log(id)
+        const { href } = this.$router.resolve({
+          name: 'book',
+          params: {
+            id: id
+          }
+        })
+        window.open(href)
+      }
     }
   }
 }

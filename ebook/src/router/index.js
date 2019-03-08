@@ -20,6 +20,11 @@ export default new Router({
           component: loadView('user/display/homepage')
         },
         {
+          path: 'market',
+          name: 'market',
+          component: loadView('user/display/market')
+        },
+        {
           path: 'book_detail/:id',
           name: 'book',
           component: loadView('user/display/book_detail')

@@ -40,19 +40,19 @@ export default {
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img1.doubanio.com/view/subject/l/public/s30019177.jpg',
           prop: '名族史诗巨著',
           id: 12
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29984241.jpg',
           prop: '名族史诗巨著',
           id: 123
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29992106.jpg',
           prop: '名族史诗巨著',
           id: 1231
         },
@@ -64,19 +64,19 @@ export default {
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img1.doubanio.com/view/subject/l/public/s30019177.jpg',
           prop: '名族史诗巨著',
           id: 123123
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29984241.jpg',
           prop: '名族史诗巨著',
           id: 1231231
         },
         {
           name: '白鹿原',
-          pic: 'https://img3.doubanio.com/view/subject/l/public/s29935015.jpg',
+          pic: 'https://img3.doubanio.com/view/subject/l/public/s29992106.jpg',
           prop: '名族史诗巨著',
           id: 12312312
         }
