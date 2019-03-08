@@ -87,7 +87,7 @@ export default {
 </script>
 <style>
   .ivu-divider-inner-text{
-    font-weight: lighter;
+    font-weight: normal;
     font-size: 30px;
   }
   .ivu-input-group .ivu-input{

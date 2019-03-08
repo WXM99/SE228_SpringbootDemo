@@ -12,11 +12,11 @@
   }
   .layout-header-bar{
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 2px #2e3347;
   }
   .ivu-layout-sider{
     background: #ffffff;
-    height: 100%;
+    box-shadow: 1px 0px 2px #2e3347;
   }
   #app > div > div > div.ivu-layout-sider > div.ivu-layout-sider-children > ul{
     height: 100%;
@@ -121,15 +121,14 @@
         <Header :style="{padding: 0}" class="layout-header-bar">
           <Row>
             <Col span="2"><Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon></Col>
-            <Col span="17"><h1>ebook 在线图书交易平台</h1></Col>
-            <Col span="5" style="height: 50px">
-              <el-switch
-                v-model="isDark"
-                @change="changeTheme"
-                active-text="夜间"
-                inactive-text="日间">
-              </el-switch>
-            </Col>
+            <Col span="20"><h1>ebook 在线图书交易平台</h1></Col>
+            <el-switch
+              style="float: right; margin-top: -40px; margin-right: 5px"
+              v-model="isDark"
+              @change="changeTheme"
+              active-text="夜间"
+              inactive-text="日间">
+            </el-switch>
           </Row>
         </Header>
         <router-view></router-view>
@@ -169,6 +168,12 @@ export default {
     },
     changeTheme () {
       console.log(this.isDark)
+      let css = document.querySelector('#css-table')
+      if (this.isDark) {
+        css.setAttribute('href', './static/dark_theme.css')
+      } else {
+        css.setAttribute('href', './static/light_theme.css')
+      }
     }
   }
 }
