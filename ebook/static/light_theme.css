@@ -39,7 +39,7 @@
   border-top:1px solid #335292 !important;
 }
 .ivu-carousel{
-  border: 10px solid #305094!important;
+  /*border: 10px solid #305094!important;*/
   box-shadow: 0px 0px 55px #305094!important;
   color: #305094;
 }
@@ -64,15 +64,18 @@
   color: #335292 !important;
 }
 .ivu-card-head>p{
-  color: #305094 !important;
+  /*color: #305094 !important;*/
   font-weight: normal !important;
   fobt-size: 14px !important;
 }
 .ivu-card-body>p{
-  color: #305094 !important;
-  font-weight: normal !important;
-  text-align: right !important;
-  margin-right: 10px !important;
+  color: #305094 ;
+  font-weight: normal ;
+  text-align: right ;
+  margin-right: 10px ;
+}
+.ivu-card{
+  border-radius: 0px!important;
 }
 .ivu-btn-primary{
   background-color: #305094!important;

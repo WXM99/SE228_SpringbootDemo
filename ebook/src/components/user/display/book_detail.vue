@@ -64,7 +64,7 @@ export default {
         pages: 123,
         price: 45.00,
         ISBN: ' 9787530218853',
-        cover_pic: 'https://img3.doubanio.com/view/subject/l/public/s29984241.jpg',
+        cover_pic: require('../../../assets/book8.jpg'),
         details: '★是枝裕和、小田切让、香川照之倾力推荐！\n' +
           '\n' +
           '★11项电影大奖导演西川美和成名作\n' +

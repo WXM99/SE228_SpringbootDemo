@@ -30,6 +30,11 @@ export default new Router({
           component: loadView('user/display/book_detail')
         }
       ]
+    },
+    {
+      path: '/user/register',
+      name: 'register',
+      component: loadView('user/user_sys/register')
     }
   ]
 })
