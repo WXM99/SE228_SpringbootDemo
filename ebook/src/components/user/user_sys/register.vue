@@ -48,7 +48,7 @@
       </Form>
       <Modal
         v-model="modal1"
-        title="注册 > 用户明确认"
+        title="注册 > 用户名确认"
         @on-ok="ok"
         @on-cancel="cancel">
         <h1 style="text-align: center">您确定将要采用以下用户名吗?</h1>
