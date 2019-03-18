@@ -77,3 +77,6 @@ typings/
 
 # IDE config file
 .idea
+
+# Apple MacOS alignment file
+.DS_Store
