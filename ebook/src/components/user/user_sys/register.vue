@@ -89,6 +89,9 @@ export default {
           this.$Message.error('请完善信息!')
         }
       })
+    },
+    ok () {
+      this.$router.push({path: '/user/login'})
     }
   }
 }

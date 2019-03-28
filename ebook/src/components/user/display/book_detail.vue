@@ -1,6 +1,6 @@
 <template>
-  <div style="margin: 30px;">
-    <Card>
+  <div style="margin: 30px; margin-top: 90px">
+    <Card class="detail">
     <Row type="flex" justify="center" align="middle" class="code-row-bg">
       <Col span="8">
         <img :src="this.book_info.cover_pic" class="book-cover">

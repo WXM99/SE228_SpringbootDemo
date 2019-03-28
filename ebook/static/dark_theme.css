@@ -1,114 +1,166 @@
 .ivu-layout{
-  background: #335292 !important;
+  background: linear-gradient(to right,#226597, #113f67) !important;
 }
-.layout-header-bar.ivu-layout-header{
-  color: #335292 !important;
-  background: #b1d0e8 !important;
+.ivu-layout-footer{
+  background: linear-gradient(to right,#226597, #113f67) !important;
+}
+.el-switch.is-checked .el-switch__core{
+  background: #226597!important;
+}
+.el-switch__label *{
+  color: #fff;
+}
+.ivu-icon.ivu-icon-ios-search{
+  color: #113f67;
+}
+.ivu-input-group .ivu-input{
+  color: #15598e !important;
+}
+.ivu-layout-header{
+  color: #ffffff !important;
+  background: linear-gradient(to right, #113f67, #87c0cd) !important;
+  /*box-shadow: 0px 3px 10px rgba(118, 130, 137, 0.59);*/
+  width: 100%!important;
+  position: fixed;
+  min-width: 1200px;
+}
+.el-switch{
+  color: #799ca6 !important;
 }
 .ivu-menu.ivu-menu-light.ivu-menu-vertical.menu-item{
-  color: #335292 !important;
-  background: #b1d0e8 !important;
+  color: #ffffff !important;
+  background: #eaeaea !important;
+}
+.ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item, .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu{
+  color: #ffffff !important;
+  font-size: 20px!important;
+}
+.ivu-menu.ivu-menu-dark.ivu-menu-horizontal{
+  color: #ffffff !important;
+  background: rgba(234, 234, 234, 0) !important;
 }
 .router-link-active{
-  color: #335292 !important;
+  color: #cbe2ec !important;
 }
 .ivu-menu.ivu-menu-light.ivu-menu-vertical.menu-item>a{
-  color: #335292 !important;
+  color: #ffffff !important;
 }
 .el-switch__label.is-active{
-  color: #335292 !important;
+  color: #ffffff !important;
 }
 .el-switch__label--right{
-  color: #335292 !important;
+  color: #ffffff !important;
+}
+.el-switch.is-checked .el-switch__core{
+  border-color: #ffffff !important;
+  background-color: #ffffff;!important;
 }
 .ivu-input{
-  border: 1px solid  #b1d0e8 !important;
-  color: #b1d0e8 !important;
+  color: #71a0a5 !important;
 }
 #app > div > div > div.ivu-layout > div:nth-child(2) > div.ivu-row.ivu-row-undefined-middle > div > div > div{
-  background: #b1d0e8 !important;
-  border-color: #b1d0e8 !important;
+  background: #f3f9fb !important;
+  border-color: #f3f9fb !important;
 }
 .ivu-divider-with-text-left{
-  color: #b1d0e8 !important;
+  color: #f3f9fb !important;
 }
 .ivu-divider-with-text-left:before{
-  border-top:1px solid #b1d0e8 !important;
+  border-top:1px solid #f3f9fb !important;
 }
 .ivu-divider-with-text-left:after{
-  border-top:1px solid #b1d0e8 !important;
+  border-top:1px solid #f3f9fb !important;
 }
 .ivu-carousel{
-  /*border: 10px solid #b1d0e8!important;*/
-  box-shadow: 0px 0px 55px #b1d0e8!important;
-  color: #b1d0e8;
+  /*border: 10px solid #f3f9fb!important;*/
+  box-shadow: 0px 0px 0px #f3f9fb!important;
+  color: #f3f9fb;
+}
+#app > div > div > div.ivu-layout-content > div > div.ivu-row.ivu-row-undefined-middle > div > div > div{
+  background: #a1bdcb !important;
+  border-color:  #f3f9fb !important;
 }
 .ivu-card-bordered{
-  box-shadow: 0px 0px 15px #b1d0e8!important;
+  /*box-shadow: 0px 0px 15px #f3f9fb!important;*/
 }
 .ivu-card-bordered:hover{
-  box-shadow: 0px 0px 25px #7ba3c0 !important;
+  transform: scale(1.01);
 }
 .ivu-collapse-simple{
-  box-shadow: 0px 0px 15px #b1d0e8!important;
 }
 .ivu-collapse-simple:hover{
-  box-shadow: 0px 0px 25px #8badc0 !important;;
 }
 .ivu-collapse>.ivu-collapse-item{
-  box-shadow: 0px 2px 1px rgba(48, 80, 148, 0.58) !important;
-  color: #b1d0e8 !important;
+  /*box-shadow: 0px 2px 1px rgba(48, 80, 148, 0.58) !important;*/
+  color: #71a0a5 !important;
   border-top: 0px !important;
 }
 .ivu-collapse>.ivu-collapse-item>.ivu-collapse-header{
-  color: #b1d0e8 !important;
+  color: #71a0a5 !important;
 }
 .ivu-card-head>p{
-  color: #b1d0e8 !important;
+  /*color: #f3f9fb !important;*/
   font-weight: normal !important;
   fobt-size: 14px !important;
 }
 .ivu-card-body>p{
-  color: #b1d0e8 !important;
-  font-weight: normal !important;
-  text-align: right !important;
-  margin-right: 10px !important;
+  color: #6f91ae;
+  font-weight: normal ;
+  text-align: right ;
+  margin-right: 10px ;
 }
-.ivu-card-body{
-  color: #b1d0e8 !important;
+.ivu-tooltip-inner{
+  background: rgba(12, 42, 71, 0.56)!important;
+}
+.ivu-card{
+  border-radius: 0px!important;
 }
 .ivu-btn-primary{
-  background-color: #b1d0e8!important;
-  border-color: #b1d0e8!important;
+  background-color: #226597!important;
+  border-color: #113f67!important;
 }
 .ivu-btn-primary:hover{
-  background-color: #72af6c !important;
-  border-color: #72af6c !important;
+  background-color: #6f91ae !important;
+  border-color: #f3f9fb !important;
 }
 .book-cover{
-  border: 10px solid #b1d0e8!important;
-  box-shadow: 0px 0px 15px #b1d0e8!important;
-  color: #b1d0e8;
+  border: 10px solid #f3f9fb!important;
+  box-shadow: 0px 0px 15px #f3f9fb!important;
+  color: #f3f9fb;
 }
-.ivu-card-bordered{
-  background: #20355f !important;
-  border: 0px !important;
+.pic-wrap{
+  height: 600px;
+  width: 105%;
+  background: rgba(0, 0, 0, 0.51);
+  margin-top: -100px
 }
-.ivu-collapse-simple{
-  background: #20355f !important;
-  border: 0px !important;
+.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active{
+  color: #113f67!important;
+  height: 50px !important;
+  font-size: 30px;
+  border: 0px;
 }
-.ivu-collapse{
-  boder: 0px !important;
+.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-nav-container{
+  height: 50px!important;
 }
-.book-title-2{
-  border-bottom: 0px!important;
+.ivu-tabs-bar{
+  margin-bottom: 0px!important;
+  height: 50px!important;
 }
-.demo-tabs-style2 > .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab{
-  color: #335292 !important;
-  background: #b1d0e8 !important;
-  border-radius: 5px 5px 0px 0px !important;
+.ivu-layout-footer{
+  color: #dcf3ff !important;
 }
-.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab{
-  border: 0px !important;
+.pic-wrap{
+  height: 600px!important;
+  width: 105%!important;
+  background: rgba(56, 80, 83, 0.75) !important;
+  margin-top: -100px!important;
+}
+.detail{
+  padding: 50px;
+  background: linear-gradient(#a5e1ec, rgb(255, 255, 255))!important;
+}
+.search-title{
+  font-size: 50px!important;
+  color: #a5e1ec!important;
 }

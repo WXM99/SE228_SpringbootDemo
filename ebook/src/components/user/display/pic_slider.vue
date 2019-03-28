@@ -76,7 +76,7 @@ export default {
 </script>
 <style>
 .slider-pic{
-  width: 101%;
+  width: 105%;
   height: 1300px;
   filter: blur(20px);
   transform: translate(-3px, -500px);
@@ -92,14 +92,5 @@ export default {
     border: solid 5px #fff;
     box-shadow: 0px 0px 25px #000;
     transform: translate(100px, 0px);
-  }
-  .pic-wrap{
-    height: 600px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.51);
-    margin-top: -100px
-  }
-  .pic-wrap:hover{
-    background: rgba(0, 0, 0, 0.76);
   }
 </style>
