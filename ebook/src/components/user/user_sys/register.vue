@@ -11,14 +11,16 @@
     background: linear-gradient(rgba(29, 38, 49, 0.73), rgba(227, 151, 70, 0));
   }
   .login-card{
-    background: rgba(123, 163, 192, 0.51);
+    background: rgba(49, 65, 78, 0.78);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: blur(20px);
-    height: 400px;
-    border-radius: 30px;
     margin-top: 200px;
     box-shadow: 0px 5px 20px rgba(29, 38, 49, 0.8);
     padding: 20px;
+  }
+  .ivu-input-group .ivu-input{
+    height: 50px;
+    font-size: 30px;
   }
 </style>
 <template>
@@ -34,11 +36,25 @@
         </FormItem>
         </Row>
         <Row>
+          <FormItem prop="mail" style="width: 80%;">
+            <Input v-model="formInline.mail" placeholder="E-mail">
+              <Icon type="ios-lock-outline" slot="prepend"></Icon>
+            </Input>
+          </FormItem>
+        </Row>
+        <Row>
         <FormItem prop="password" style="width: 80%;">
           <Input type="password" v-model="formInline.password" placeholder="Password">
             <Icon type="ios-lock-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
+        </Row>
+        <Row>
+          <FormItem prop="passwdCheck" style="width: 80%;">
+            <Input type="password" v-model="formInline.passwdCheck"  placeholder="Repeat password">
+              <Icon type="ios-lock-outline" slot="prepend"></Icon>
+            </Input>
+          </FormItem>
         </Row>
         <Row>
         <FormItem>
@@ -49,8 +65,7 @@
       <Modal
         v-model="modal1"
         title="注册 > 用户名确认"
-        @on-ok="ok"
-        @on-cancel="cancel">
+        @on-ok="ok">
         <h1 style="text-align: center">您确定将要采用以下用户名吗?</h1>
         <h1 class="reg-username" style="text-align: center; font-size: 50px"></h1>
       </Modal>
@@ -62,11 +77,22 @@ export default {
   components: {
   },
   data () {
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please enter your password again'))
+      } else if (value !== this.formInline.password) {
+        callback(new Error('The two input passwords do not match!'))
+      } else {
+        callback()
+      }
+    }
     return {
       modal1: false,
       formInline: {
         user: '',
-        password: ''
+        password: '',
+        passwdCheck: '',
+        mail: ''
       },
       ruleInline: {
         user: [
@@ -75,6 +101,13 @@ export default {
         password: [
           { required: true, message: 'Please fill in the password.', trigger: 'blur' },
           { type: 'string', min: 1, message: 'The password length cannot be less than 1 bits', trigger: 'blur' }
+        ],
+        passwdCheck: [
+          {validator: validatePassCheck, trigger: 'blur'}
+        ],
+        mail: [
+          { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
+          { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
         ]
       }
     }

@@ -17,7 +17,7 @@
     left: 20px;
   }
   .layout-nav{
-    width: 420px;
+    width: 520px;
     margin: 0 auto;
     margin-right: 20px;
   }
@@ -33,37 +33,47 @@
   .ebk-logo:hover{
     transform: scale(1.1);
   }
+  .ad-bg{
+  }
+  .ivu-menu-item{
+    margin-top: 0px;
+  }
 </style>
 <template>
-  <div class="layout">
+  <div class="layout ad-bg">
     <Layout>
       <Header style="z-index: 99">
         <Menu mode="horizontal" theme="dark" active-name="1">
-          <router-link to="/">
-          <div class="layout-logo" style="background: rgba(255,255,255,0); margin-top: -10px; width: 350px;">
-            <img class="ebk-logo"><p style="font-size: 30px; font-weight: bolder; color: #fff">Ebook 图书交易网站</p>
-          </div>
+          <router-link to="/admin">
+            <div class="layout-logo" style="background: rgba(255,255,255,0); margin-top: -10px; width: 300px;">
+              <img class="ebk-logo"><p style="font-size: 30px; font-weight: lighter; color: #fff;">Ebook<span style="font-weight: bolder">管理系统</span></p>
+            </div>
           </router-link>
-          <div class="layout-nav" style="width: 700px;">
-            <router-link to="/search_for/-">
-            <MenuItem name="1-2">
-              <Icon type="ios-book" />
-              <span>图书搜索</span>
-            </MenuItem>
-            </router-link>
-            <router-link to="/market">
-              <MenuItem name="1-3">
-                <Icon type="md-apps" />
-                <span>分类浏览</span>
+          <div class="layout-nav" style="width: 800px;">
+            <router-link to="/admin/book">
+              <MenuItem name="1-2">
+                <Icon type="ios-book" />
+                <span>图书管理</span>
               </MenuItem>
             </router-link>
-            <router-link  to="/collections">
-            <MenuItem name="1-5">
-              <Icon type="md-albums" />
-              <span>收藏夹</span>
-            </MenuItem>
+            <router-link to="/admin/user">
+              <MenuItem name="1-3">
+                <Icon type="ios-contact" />
+                <span>用户管理</span>
+              </MenuItem>
             </router-link>
-            <Chart></Chart>
+            <router-link  to="/admin/order">
+              <MenuItem name="1-5">
+                <Icon type="md-reorder" />
+                <span>订单管理</span>
+              </MenuItem>
+            </router-link>
+            <router-link  to="/admin/data">
+              <MenuItem name="1-5">
+                <Icon type="ios-cube" />
+                <span>信息统计</span>
+              </MenuItem>
+            </router-link>
             <el-switch
               style="float: right; margin-right: -55px; margin-top: 20px;"
               v-model="isDark"
@@ -72,13 +82,12 @@
               inactive-text="日间">
             </el-switch>
             <Tooltip placement="bottom" theme="light">
-              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" style="margin-left: -20px"/>
               <div slot="content">
-                <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! Username</p></Row>
-                <router-link to="/account"><Button style="margin-bottom: 5px; font-size: 20px;" type="primary">个人中心</Button></router-link>
-                  <router-link to="/user/login">
-                    <Button style="margin-bottom: 5px; font-size: 20px;">退出登录</Button>
-                  </router-link>
+                <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! 管理员</p></Row>
+                <router-link to="/user/login">
+                  <Button style="margin-bottom: 5px; font-size: 20px; width: 100%">退出登录</Button>
+                </router-link>
               </div>
             </Tooltip>
           </div>
@@ -87,12 +96,11 @@
       <Content>
         <router-view></router-view>
       </Content>
-      <Footer class="layout-footer-center">2019 &copy; Wei Xiao-Miao SE218</Footer>
+      <Footer class="layout-footer-center" style="float: bottom">2019 &copy; Wei Xiao-Miao SE218</Footer>
     </Layout>
   </div>
 </template>
 <script>
-import Chart from './display/merchandise/chart'
 export default {
   data () {
     return {
@@ -111,7 +119,6 @@ export default {
     }
   },
   components: {
-    Chart
   }
 }
 </script>

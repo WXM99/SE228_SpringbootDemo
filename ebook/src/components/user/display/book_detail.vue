@@ -3,7 +3,7 @@
     <Card class="detail">
     <Row type="flex" justify="center" align="middle" class="code-row-bg">
       <Col span="8">
-        <img :src="this.book_info.cover_pic" class="book-cover">
+        <img :src="this.book_info.pic" class="book-cover">
       </Col>
       <Col span="15" offset="1">
         <Row><h1 class="book-title">{{this.book_info.name}}<p style="float: right">&nbsp;{{this.book_info.price}}.00¥</p></h1></Row>
@@ -13,11 +13,11 @@
           <p class="info-item" v-if="this.book_info.ori_name !== null">原名: {{this.book_info.ori_name}}</p>
           <p class="info-item" v-if="this.book_info.translator !== null">译者: {{this.book_info.translator}}</p>
           <p class="info-item">出版时间: {{this.book_info.publish_time}}</p>
-          <p class="info-item">页数: {{this.book_info.ISBN}}</p>
+          <p class="info-item">ISBN: {{this.book_info.ISBN}}</p>
         </Row>
         <Row><Tag v-for="tag in this.book_info.tags" :key="tag" style="font-size: 16px">{{tag}}</Tag></Row>
         <Row>
-          <Col span="12" offset="6"><Button type="primary" style="width: 100%; height: 50px; margin-top: 20px; font-size: 30px; line-height: 30px">加入购物车</Button></Col>
+          <Col span="12" offset="6"><Button type="primary" style="width: 100%; height: 50px; margin-top: 20px; font-size: 30px; line-height: 30px" @click="buy">加入购物车</Button></Col>
         </Row>
       </Col>
     </Row>
@@ -50,7 +50,21 @@
   </div>
 </template>
 <script>
+import store from '../../../main'
 export default {
+  methods: {
+    buy: function () {
+      store.commit('addBook', this.book_info)
+      store.commit('update', 0)
+      this.$Notice.success({
+        title: '《' + this.book_info.name + '》已加入购物车',
+        desc: '作者: ' + this.book_info.author + ' 价格: ' + this.book_info.price + '元'
+      })
+    }
+  },
+  component: {
+    store
+  },
   data () {
     return {
       id: this.$route.params.id,
@@ -63,8 +77,9 @@ export default {
         publish_time: '2019-3-1',
         pages: 123,
         price: 45.00,
-        ISBN: ' 9787530218853',
-        cover_pic: require('../../../assets/book8.jpg'),
+        ISBN: '9787530218853',
+        ammount: 1,
+        pic: require('../../../assets/book8.jpg'),
         details: '★是枝裕和、小田切让、香川照之倾力推荐！\n' +
           '\n' +
           '★11项电影大奖导演西川美和成名作\n' +

@@ -72,7 +72,6 @@ export default {
         },
         {
           title: 'Name',
-          width: '350px',
           key: 'name',
           sortable: true,
           render: (h, params) => {
@@ -107,6 +106,7 @@ export default {
         {
           title: 'Author',
           key: 'name',
+          width: '200px',
           sortable: true,
           render: (h, params) => {
             return h('div', {
@@ -117,14 +117,16 @@ export default {
           }
         },
         {
-          title: 'Intro',
-          key: 'prop',
+          title: 'Time',
+          width: '150px',
+          key: 'time',
+          sortable: true,
           render: (h, params) => {
             return h('div', {
               style: {
                 fontSize: '20px'
               }
-            }, params.row.prop)
+            }, params.row.time)
           }
         },
         {

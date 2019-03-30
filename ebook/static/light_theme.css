@@ -141,7 +141,46 @@
   padding: 50px;
   background: linear-gradient(#daf6d6, rgb(255, 255, 255))!important;
 }
+.ivu-drawer-content{
+  /*background: linear-gradient(#daf6d6, rgb(255, 255, 255))!important;*/
+}
+.ivu-divider.ivu-divider-horizontal.ivu-divider-default{
+  background: rgba(210, 238, 207, 0.22) !important;
+}
 .search-title{
   font-size: 50px!important;
   color: #94aa92!important;
+}
+.user-info{
+  color: #ffffff !important;
+}
+.avator-big{
+  border: solid 10px #8aaa81;!important;
+}
+.ivu-tooltip-inner{
+  background: rgba(97, 122, 91, 0.78) !important;
+}
+.book-collect{
+  background: rgba(148, 170, 146, 0.47) !important;
+}
+.cart-book{
+  border: solid 5px #8aaa81;!important;
+}
+.ad-title{
+  color: #71a0a5;
+}
+.ad-card{
+  background: #71a0a5!important;
+}
+.ad-card:hover{
+  background: #b9d2b6 !important;
+}
+.ivu-date-picker-cells-cell-selected em, .ivu-date-picker-cells-cell-selected:hover em{
+  background: #8aaa81!important;
+}
+.ivu-date-picker-cells-focused em{
+  box-shadow: 0px 0px 1px #657d5f !important;
+}
+.ivu-date-picker-cells-cell-range:before{
+  background: #dff2dc !important;
 }

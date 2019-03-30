@@ -2,6 +2,7 @@
   <div style="margin-top: 80px">
     <Divider orientation="left" class="prop">收藏夹</Divider>
       <grid :books="this.books_rec"></grid>
+    <Page :total="100" style="margin-top: 10px"/>
   </div>
 </template>
 <script>

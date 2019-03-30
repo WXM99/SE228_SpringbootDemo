@@ -12,14 +12,17 @@ login page
     background: linear-gradient(rgba(29, 38, 49, 0.73), rgba(227, 151, 70, 0));
   }
   .login-card{
-    background: rgba(123, 163, 192, 0.51);
+    background: rgba(123, 163, 192, 0.82);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: blur(20px);
-    height: 400px;
     border-radius: 30px;
     margin-top: 200px;
     box-shadow: 0px 5px 20px rgba(29, 38, 49, 0.8);
     padding: 20px;
+  }
+  .ivu-input-group .ivu-input{
+    height: 50px;
+    font-size: 30px;
   }
 </style>
 <template>
@@ -51,6 +54,11 @@ login page
         </Row>
       </Form>
     </Col>
+    <Modal
+      v-model="modal1"
+      title="提示">
+      <h1 style="text-align: center">您的账号已被管理员禁止!</h1>
+    </Modal>
   </div>
 </template>
 <script>
@@ -59,6 +67,7 @@ export default {
   },
   data () {
     return {
+      modal1: false,
       formInline: {
         user: '',
         password: ''
@@ -79,7 +88,13 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           console.log(this.formInline.user)
-          this.$router.push({path: '/'})
+          if (this.formInline.user === 'forbidden') {
+            this.modal1 = true
+          } else if (this.formInline.user === 'admin') {
+            this.$router.push({path: '/admin'})
+          } else {
+            this.$router.push({path: '/'})
+          }
         } else {
           this.$Message.error('请完善信息!')
         }

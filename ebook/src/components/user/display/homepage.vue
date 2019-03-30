@@ -93,7 +93,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .ivu-divider-inner-text{
     font-weight: normal;
     font-size: 30px;

@@ -8,6 +8,7 @@
     <Card style="padding: 10px; margin: 30px" >
       <p v-if="keyword_last !== '-'" style="text-align: center; font-size: 20px; font-weight: bolder">关键字: {{keyword_last}}</p>
     <book-table :data_in="books_rec"></book-table>
+      <Page :total="100" style="margin-top: 10px"/>
     </Card>
   </div>
 </template>

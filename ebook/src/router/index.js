@@ -44,6 +44,11 @@ export default new Router({
           path: 'sell',
           name: 'sell',
           component: loadView('user/display/sellers/sell')
+        },
+        {
+          path: 'account',
+          name: 'account',
+          component: loadView('user/display/account/index')
         }
       ]
     },
@@ -57,6 +62,38 @@ export default new Router({
       path: '/user/login',
       name: 'login',
       component: loadView('user/user_sys/login')
+    },
+    // admin pages
+    {
+      path: '/admin',
+      component: loadView('admin/layout'),
+      children: [
+        {
+          path: '',
+          name: 'ad_index',
+          component: loadView('admin/index')
+        },
+        {
+          path: 'book',
+          name: 'ad_book',
+          component: loadView('admin/books/index')
+        },
+        {
+          path: 'user',
+          name: 'ad_user',
+          component: loadView('admin/users/index')
+        },
+        {
+          path: 'order',
+          name: 'ad_order',
+          component: loadView('admin/orders/index')
+        },
+        {
+          path: 'data',
+          name: 'ad_data',
+          component: loadView('admin/data/index')
+        }
+      ]
     }
   ]
 })
