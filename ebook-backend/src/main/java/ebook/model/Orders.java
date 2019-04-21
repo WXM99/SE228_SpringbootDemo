@@ -8,25 +8,27 @@ import java.util.Date;
 public class Orders {
     @Id
     @GeneratedValue
-    private Long orderID;
+    public Long orderID;
 
 //    @Column(nullable = true)
-//    private String userID;
+//    public String userID;
 
     @ManyToOne
     @JoinColumn(name = "userID",foreignKey = @ForeignKey(name = "userID",value = ConstraintMode.CONSTRAINT))
-    private UserEntity buyer;
+    public UserEntity buyer;
 
     @Column(nullable = false)
-    private Integer state;
+    public Integer state;
 
     @Column(nullable = false)
-    private Double tot_price;
+    public Double tot_price;
 
     @Column(nullable = false)
-    private Date create_at;
+    public Date create_at;
 
     @Column(nullable = true)
-    private Date finish_at;
+    public Date finish_at;
+    
+    public Orders(){}
 
 }

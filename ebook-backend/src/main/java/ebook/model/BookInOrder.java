@@ -13,7 +13,7 @@ public class BookInOrder {
 
     @ManyToOne
     @JoinColumn(name = "orderID",foreignKey = @ForeignKey(name = "orderID",value = ConstraintMode.CONSTRAINT))
-    public Orders belong_to;
+    public Orders belongto;
 
     @ManyToOne
     @JoinColumn(name = "isbn",foreignKey = @ForeignKey(name = "isbn",value = ConstraintMode.CONSTRAINT))
@@ -29,11 +29,11 @@ public class BookInOrder {
     }
 
     public BookInOrder(
-            Orders belong_to,
+            Orders belongto,
             BookInfoBrief book,
             Double curr_price,
             Integer amount) {
-        this.belong_to = belong_to;
+        this.belongto = belongto;
         this.book = book;
         this.curr_price = curr_price;
         this.amount = amount;

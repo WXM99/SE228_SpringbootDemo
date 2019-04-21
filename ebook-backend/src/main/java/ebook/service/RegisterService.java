@@ -14,9 +14,7 @@ public class RegisterService {
     private UserRepository userRepository;
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    public UserEntity registerUser(
-            JSONObject input_user
-    ) {
+    public UserEntity registerUser(JSONObject input_user) {
         String avatar_path = (String) input_user.get("avatar_path");
         String email = (String) input_user.get("email");
         String password = (String) input_user.get("password");

@@ -29,11 +29,6 @@ public class BookInfoController {
         return this.bookService.allBook();
     }
 
-    @RequestMapping(value = "/add_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public BookInfoBrief add_book(@RequestBody JSONObject new_book) throws IOException {
-        return this.bookService.addBook(new_book);
-    }
 
     @RequestMapping(value = "/find_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
@@ -41,9 +36,4 @@ public class BookInfoController {
         return this.bookService.findBook(input);
     }
 
-    @RequestMapping(value = "/delete_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public BookInfoBrief delete_book(@RequestBody JSONObject input) throws IOException {
-        return this.bookService.deleteBook(input);
-    }
 }
