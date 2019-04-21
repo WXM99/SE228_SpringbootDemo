@@ -1,4 +1,4 @@
-# README
+# Update.
 
 ## 1. 启动
 
@@ -55,4 +55,34 @@ on port :8080
    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
    ```
 
+
+## 4. ORM + APIs Design
+
+1. ORM: JPA + Entity
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/ebook?useUnicode=true&connectionCollation=utf8_general_ci&characterSetResults=utf-8
+   spring.datasource.username=root
+   spring.datasource.password=
+   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+   spring.jpa.properties.hibernate.hbm2ddl.auto=create
+   spring.jpa.properties.hibernate.dialect=ebook.config.MySQLDialectConfig
+   spring.jpa.show-sql=true
+   spring.jpa.properties.hibernate.format_sql=true
+   ```
+
+2. Entity definition
+
+   ![image-20190421182658031](README.assets/image-20190421182658031.png)
+
+3. MVC structure design
+
+   ```DB -> model -> repository -> service -> controller```
+
+   ![image-20190421182825938](README.assets/image-20190421182825938.png)
+
    
+
+4. APIs in Controller
+
+   ![WX20190421-183149](README.assets/WX20190421-183149.png)
