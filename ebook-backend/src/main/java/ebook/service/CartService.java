@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CartService {
@@ -166,12 +164,11 @@ public class CartService {
         return this.orderRepository.findByBuyerAndState(user,CART_ORDER);
     }
 
-    public List<BookInfoBrief> findBooksByOrder(Orders cart){
-        List<BookInOrder> bks_in_cart = this.cartRepository.findByBelongto(cart);
-        List<BookInfoBrief> books = new ArrayList<>();
-        for (BookInOrder bk: bks_in_cart) {
-            books.add(bk.book);
-        }
-        return books;
+    public List<BookInOrder> findBooksByOrder(Orders cart){
+        return this.cartRepository.findByBelongto(cart);
+    }
+
+    public List<BookInOrder> findItemsByOrder(Orders cart){
+        return  this.cartRepository.findByBelongto(cart);
     }
 }

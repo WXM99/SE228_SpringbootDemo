@@ -53,10 +53,10 @@ public class CartInfoController {
 
     @RequestMapping(value = "/get_cart", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<BookInfoBrief> get_cart(@RequestBody JSONObject input) throws IOException {
+    public List<BookInOrder> get_cart(@RequestBody JSONObject input) throws IOException {
         Orders cart = this.cartService.giveCart(input);
+        List<BookInOrder> items = this.cartService.findItemsByOrder(cart);
         return this.cartService.findBooksByOrder(cart);
     }
-
 
 }

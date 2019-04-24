@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     UserDetailsService getAuthorization(){ //注册UserDetailsService 的bean
-        return new AuthorizeConfig();
+        return new UserDetailService();
     }
 
     @Autowired
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("*").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/without_log")

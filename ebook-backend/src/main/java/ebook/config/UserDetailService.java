@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class AuthorizeConfig implements UserDetailsService {
+public class UserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
@@ -48,8 +48,8 @@ public class AuthorizeConfig implements UserDetailsService {
         String username = user.username;
 
         if (user.is_manager) {
-            grantedAuthority.add(new SimpleGrantedAuthority("ADMIN"));
-            grantedAuthority.add(new SimpleGrantedAuthority("USER"));
+            grantedAuthority.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            // grantedAuthority.add(new SimpleGrantedAuthority("USER"));
         }
         else if (!user.is_manager) {
             grantedAuthority.add(new SimpleGrantedAuthority("USER"));

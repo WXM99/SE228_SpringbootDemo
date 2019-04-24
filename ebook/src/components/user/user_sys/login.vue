@@ -62,8 +62,22 @@ login page
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   components: {
+  },
+  mounted () {
+    this.$axios({
+      method: 'post',
+      url: '/login',
+      data: this.formInline,
+      withCredentials: true
+    }).then(response => {
+      console.log('API: /login/submit/\n', response)
+    })
+  },
+  comments: {
+    axios
   },
   data () {
     return {

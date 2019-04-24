@@ -8,10 +8,17 @@ import 'element-ui/lib/theme-chalk/index.css'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import Vuex from 'vuex'
+import axios from '../node_modules/axios'
 
 Vue.use(iView)
 Vue.use(ElementUI)
 Vue.use(Vuex)
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.withCredentials = true // ajax with coockie
+Vue.prototype.$axios = axios
+Vue.prototype.$ajax = axios
+/* axios base url: change it when dispatch or integrate testing */
+axios.defaults.baseURL = 'http://localhost:9090'
 /* store in vuex  */
 const store = new Vuex.Store({
   state: {
@@ -159,6 +166,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  axios,
   components: { App },
   template: '<App/>'
 })
