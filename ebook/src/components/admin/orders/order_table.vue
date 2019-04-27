@@ -16,22 +16,55 @@
   <div>
     <Table border :columns="columns" :data="this.data_in">
       <template slot-scope="{ row, index }" slot="state">
-        <Button style="font-size: 16px" v-if="row.state === 0">正常</Button>
-        <Button style="font-size: 16px" v-else type="error" ghost>异常</Button>
+        <Button style="font-size: 16px" v-if="row.state === 1" type="primary">已完成</Button>
+        <Button style="font-size: 16px" v-else>购物车</Button>
+      </template>
+      <template slot-scope="{ row, index }" slot="books">
+        <Button style="font-size: 16px" type="primary" @click="viewBooks(index)">view books</Button>
       </template>
     </Table>
+    <Modal
+      v-model="books_show"
+      width="1300">
+      <div slot="header" style="font-size: 30px; text-align: center">订单记录</div>
+      <div>
+        <h1 style="text-align: center">订单ID: {{this.order_inspect}}</h1>
+        <order-book :data_in="this.books"></order-book>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
+import orderBook from '../books/book_in_order'
 export default {
   methods: {
+    viewBooks (index) {
+      let orderid = this.data_in[index].orderID
+      this.order_inspect = orderid
+      this.$axios({
+        method: 'post',
+        url: '/api/get_my_books_in_order',
+        data: {
+          'orderid': orderid
+        },
+        withCredentials: true
+      }).then(response => {
+        let items = response.data
+        this.books = items
+        this.books_show = true
+      })
+      // this.books_show = true
+      // console.log(orderid)
+    }
   },
   data () {
     return {
+      books_show: false,
+      order_inspect: null,
+      books: [],
       columns: [
         {
           title: 'orderID',
-          width: '150px',
           key: 'order_id',
           sortable: true,
           render: (h, params) => {
@@ -42,12 +75,11 @@ export default {
                   fontSize: '40px'
                 }
               },
-              params.row.order_id)]
+              params.row.orderID)]
           }
         },
         {
-          title: 'buyerID',
-          width: '150px',
+          title: 'buyer',
           padding: '0px',
           key: 'buyer_id',
           sortable: true,
@@ -59,14 +91,13 @@ export default {
                   fontSize: '40px'
                 }
               },
-              params.row.buyer_id)]
+              params.row.buyer.username)]
           },
           align: 'center'
         },
         {
-          title: 'bookISBN',
-          width: '270px',
-          key: 'bookISBN',
+          title: 'tot_price',
+          key: 'books',
           sortable: true,
           render: (h, params) => {
             return [
@@ -77,34 +108,28 @@ export default {
                   fontWeight: 'bolder'
                 }
               },
-              params.row.bookISBN)
+              params.row.tot_price + '¥')
             ]
           }
         },
         {
           title: 'Time',
           key: 'time',
-          width: '150px',
           sortable: true,
           render: (h, params) => {
             return h('div', {
               style: {
                 fontSize: '20px'
               }
-            }, params.row.time)
+            }, params.row.finish_at !== null ? params.row.finish_at.substr(0, 10) : '(未完成)')
           }
         },
         {
-          title: 'Ammount',
-          key: 'ammount',
-          sortable: true,
-          render: (h, params) => {
-            return h('div', {
-              style: {
-                fontSize: '20px'
-              }
-            }, params.row.ammount)
-          }
+          title: 'Books',
+          width: '120px',
+          key: 'orderID',
+          slot: 'books',
+          align: 'center'
         },
         {
           title: 'State',
@@ -122,6 +147,9 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  components: {
+    orderBook
   }
 }
 </script>

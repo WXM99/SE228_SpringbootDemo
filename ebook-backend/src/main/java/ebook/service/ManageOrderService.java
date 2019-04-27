@@ -14,6 +14,10 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -34,6 +38,13 @@ public class ManageOrderService {
         return orders;
     }
 
+    public List<Orders> findMyOrders(Principal principal) {
+        String username = principal.getName();//(String) input.get("username");
+        UserEntity user = this.userRepository.findByUsername(username);
+        List<Orders> orders = this.orderRepository.findByBuyer(user);
+        return orders;
+    }
+
     public Set<Orders> findOrdersByIsbn(JSONObject input) {
         Long isbn = new Long((Integer)input.get("isbn"));
         List<BookInOrder> orders = this.cartRepository.findByBook(this.bookRepository.findByIsbn(isbn));
@@ -44,14 +55,27 @@ public class ManageOrderService {
         return res;
     }
 
-    public List<BookInfoBrief> orderBooks(JSONObject input) {
+    public List<BookInOrder> orderBooks(JSONObject input) {
         Long orderid = new Long((Integer)input.get("orderid"));
         Orders belongto = this.orderRepository.findByOrderID(orderid);
         List<BookInOrder> bks_in_cart = this.cartRepository.findByBelongto(belongto);
-        List<BookInfoBrief> books = new ArrayList<>();
-        for (BookInOrder bk: bks_in_cart) {
-            books.add(bk.book);
-        }
-        return books;
+        return bks_in_cart;
+    }
+
+    public List<Orders> findOrderInDate(JSONObject input, Principal principal) throws ParseException {
+        System.out.println("----------------------------------------------------");
+        String utcFrom = (String)input.get("from");
+        String utcTo = (String)input.get("to");
+        System.out.println(utcFrom);
+        System.out.println(utcTo);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+        Date d1 = dateFormat.parse(utcFrom);
+        Date d2 = dateFormat.parse(utcTo);
+        d1 = new Date(d1.getTime() + 32*3600000);
+        d2 = new Date(d2.getTime() + 32*3600000);
+        System.out.println(d1);
+        System.out.println(d2);
+        String username = principal.getName();
+        return this.orderRepository.findOrderInDate(d1, d2, username);
     }
 }

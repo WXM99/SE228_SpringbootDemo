@@ -72,12 +72,12 @@
               inactive-text="日间">
             </el-switch>
             <Tooltip placement="bottom" theme="light">
-              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+              <Avatar :src="this.myAvatar" />
               <div slot="content">
-                <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! Username</p></Row>
+                <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! {{this.myName}}</p></Row>
                 <router-link to="/account"><Button style="margin-bottom: 5px; font-size: 20px;" type="primary">个人中心</Button></router-link>
                   <router-link to="/user/login">
-                    <Button style="margin-bottom: 5px; font-size: 20px;">退出登录</Button>
+                    <Button style="margin-bottom: 5px; font-size: 20px;" @click="logout">退出登录</Button>
                   </router-link>
               </div>
             </Tooltip>
@@ -93,11 +93,29 @@
 </template>
 <script>
 import Chart from './display/merchandise/chart'
+import Cookies from 'js-cookie'
 export default {
   data () {
     return {
-      isDark: false
+      isDark: false,
+      myName: '',
+      myAvatar: ''
     }
+  },
+  mounted () {
+    this.$axios({
+      method: 'get',
+      url: '/api/get_my_info',
+      withCredentials: true
+    }).then(response => {
+      console.log('API response\n', response)
+      this.myName = response.data.username
+      if (response.data.avatar_path === 'none') {
+        this.myAvatar = 'https://i.loli.net/2017/08/21/599a521472424.jpg'
+      } else {
+        this.myAvatar = response.data.avatar_path
+      }
+    })
   },
   methods: {
     changeTheme () {
@@ -108,6 +126,9 @@ export default {
       } else {
         css.setAttribute('href', './static/light_theme.css')
       }
+    },
+    logout () {
+      Cookies.remove('login')
     }
   },
   components: {

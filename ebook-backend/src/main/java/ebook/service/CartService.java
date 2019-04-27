@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -40,8 +41,9 @@ public class CartService {
         this.orderRepository.save(cart);
     }
 
-    public Orders addToCart(JSONObject input){
-        String userame = (String) input.get("username");
+    public Orders addToCart(JSONObject input, Principal principal){
+        String userame = principal.getName();//(String) input.get("username");
+        System.out.println(userame);
         UserEntity user = this.userRepository.findByUsername(userame);
         Long isbn =  new Long((Integer)input.get("isbn"));
         BookInfoBrief book = this.bookRepository.findByIsbn(isbn);
@@ -80,8 +82,8 @@ public class CartService {
         return in_cart;
     }
 
-    public Orders removeFromCart(JSONObject input){
-        String userame = (String) input.get("username");
+    public Orders removeFromCart(JSONObject input, Principal principal){
+        String userame = principal.getName();//(String) input.get("username");
         UserEntity user = this.userRepository.findByUsername(userame);
         Long isbn =  new Long((Integer)input.get("isbn"));
         BookInfoBrief book = this.bookRepository.findByIsbn(isbn);
@@ -106,8 +108,8 @@ public class CartService {
         return in_cart;
     }
 
-    public Orders clearCart(JSONObject input) {
-        String username = (String) input.get("username");
+    public Orders clearCart(Principal principal) {
+        String username = principal.getName();//(String) input.get("username");
         UserEntity user = this.userRepository.findByUsername(username);
 
         /* find the user's present cart */
@@ -156,8 +158,8 @@ public class CartService {
 
     }
 
-    public Orders giveCart(JSONObject input){
-        String username = (String) input.get("username");
+    public Orders giveCart(Principal principal){
+        String username = principal.getName();//(String) input.get("username");
         UserEntity user = this.userRepository.findByUsername(username);
 
         /* find the user's present cart */

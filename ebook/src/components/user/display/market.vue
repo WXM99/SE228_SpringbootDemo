@@ -30,64 +30,23 @@ export default {
   components: {
     bookTable
   },
+  mounted () {
+    this.$axios({
+      method: 'post',
+      url: 'api/get_all_book',
+      withCredentials: true
+    }).then(response => {
+      console.log('API response\n', response)
+      this.data5 = response.data
+    })
+  },
   data () {
     return {
       data5: [
         {
-          name: 'Yukio Mishima',
-          pic: require('../../../assets/book1.jpg'),
-          prop: '探索内心的宁静',
-          ISBN: 9787559604057,
-          price: 1
-        },
-        {
-          name: 'The Night Ocean',
-          pic: require('../../../assets/book2.jpg'),
-          prop: '迷失在夜的深海...',
-          ISBN: 9787559604017,
-          price: 2
-        },
-        {
-          name: 'Obsessed',
-          pic: require('../../../assets/book3.jpg'),
-          prop: '花花世界, 情迷意乱.',
-          ISBN: 9787559632127,
-          price: 3
-        },
-        {
-          name: 'MUSKULATUREN',
-          pic: require('../../../assets/book4.jpg'),
-          prop: 'MUSKULATUREN',
-          ISBN: 9787559604051,
-          price: 4
-        },
-        {
-          name: 'Surface Breaks',
-          pic: require('../../../assets/book5.jpg'),
-          prop: '打破面具后的沉默',
-          ISBN: 9787559604123,
-          price: 5
-        },
-        {
-          name: 'The Transcriptionist',
-          pic: require('../../../assets/book6.jpg'),
-          prop: '思想中的变与静',
-          ISBN: 9787559604012,
-          price: 6
-        },
-        {
-          name: 'Mothers Stories',
-          pic: require('../../../assets/book7.jpg'),
-          prop: '听妈妈讲过去的故事...',
-          ISBN: 9787559605442,
-          price: 7
-        },
-        {
-          name: 'Embodied Hope',
-          pic: require('../../../assets/book8.jpg'),
-          prop: '让希望与肉身共存',
-          ISBN: 9787559604023,
-          price: 8
+          name: null,
+          isbn: null,
+          price: null
         }
       ]
     }

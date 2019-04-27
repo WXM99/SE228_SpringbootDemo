@@ -62,4 +62,29 @@ public class ManageBookService {
             return this.bookRepository.save(found);
         }
     }
+
+    public BookInfoBrief updateBook(JSONObject new_book) {
+        String name = (String) new_book.get("name");
+        String author = (String) new_book.get("author");
+        String cover_path = (String) new_book.get("cover_path");
+        String intro = (String) new_book.get("intro");
+        Long isbn = new Long((Integer)new_book.get("isbn"));
+        Double price = (Double) new_book.get("price");
+        Integer inventory = (Integer) new_book.get("inventory");
+
+        BookInfoBrief find_add = this.bookRepository.findByIsbn(isbn);
+        if (find_add != null) {
+            BookInfoBrief saving_book = new BookInfoBrief(
+                    isbn, name, price,
+                    inventory, author,
+                    cover_path, intro, NORMAL_BOOK);
+            return this.bookRepository.save(saving_book);
+        } else {
+            BookInfoBrief found = new BookInfoBrief();
+            found.isbn = isbn;
+            found.state = 303;
+            found.intro = "not find book " + isbn;
+            return found;
+        }
+    }
 }

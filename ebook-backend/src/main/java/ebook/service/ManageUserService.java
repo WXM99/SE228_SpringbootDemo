@@ -4,7 +4,10 @@ import ebook.model.UserEntity;
 import ebook.repository.UserRepository;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ManageUserService {
@@ -45,5 +48,11 @@ public class ManageUserService {
             found.freeUser();
             return this.userRepository.save(found);
         }
+    }
+
+    public List<UserEntity> findUserWithPage(JSONObject input) {
+        int offset = (int) input.get("offset");
+        int limit = (int) input.get("limit");
+        return this.userRepository.find_with_page(new PageRequest(offset, limit));
     }
 }

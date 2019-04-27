@@ -6,8 +6,10 @@ import ebook.repository.BookRepository;
 import jdk.internal.dynalink.linker.LinkerServices;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -33,6 +35,17 @@ public class BookService {
         } else {
             return found;
         }
+    }
+
+    public List<BookInfoBrief> findBookWithPage(JSONObject input) {
+        int offset = (int) input.get("offset");
+        int limit = (int) input.get("limit");
+        return this.bookRepository.find_with_page(new PageRequest(offset, limit));
+    }
+
+    public  List<BookInfoBrief> searchBook(JSONObject input) {
+        String key = (String) input.get("keyword");
+        return this.bookRepository.search_book(key);
     }
 
 }

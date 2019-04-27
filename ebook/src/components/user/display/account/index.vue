@@ -5,23 +5,23 @@
       <Row align="middle" type="flex" justify="center">
         <Col span="8">
           <Tooltip>
-            <img src="https://i.loli.net/2017/08/21/599a521472424.jpg"
+            <img :src="this.myAvatar"
                  class="avator-big">
-            <div slot="content" style="font-size: 50px;">Username</div>
+            <div slot="content" style="font-size: 50px;">{{this.myName}}</div>
           </Tooltip>
         </Col>
         <Col span="16">
           <h1 style="font-size: 50px;text-align: left">个人信息</h1>
-          <h1 style="font-size: 30px;text-align: left">用户名: Username</h1>
-          <h1 style="font-size: 30px;text-align: left">邮箱: sample@sample.com</h1>
+          <h1 style="font-size: 30px;text-align: left">用户名: {{this.myName}}</h1>
+          <h1 style="font-size: 30px;text-align: left">邮箱: {{this.myEmail}}</h1>
           <h1 style="font-size: 30px;text-align: left">最近收藏:</h1>
           <Row align="middle" type="flex" justify="center" >
             <Col v-for="book in book_collect"
-                 :key="book.ISBN"
+                 :key="book.isbn"
                  span="4">
-              <Card style="width: 95%;"
+              <Card style="width: 95%;padding: -5px"
                     class="book-collect">
-                <img :src="book.pic" style="width: 100%" @click="viewBook(book.ISBN)">
+                <img :src="book.cover_path" style="width: 100%" @click="viewBook(book.isbn)">
               </Card>
             </Col>
             <Col span="4">
@@ -52,7 +52,7 @@
 </template>
 <script>
 import grid from '../book_grid'
-import bookTable from '../history_table'
+import bookTable from '../../../admin/orders/order_table'
 export default {
   components: {
     grid,
@@ -78,111 +78,84 @@ export default {
       // window.open(href)
     },
     timeFilter (timespan) {
-      console.log(timespan)
+      console.log(timespan[0])
+      console.log(timespan[1])
+      if (timespan[0] !== '') {
+        this.$axios({
+          method: 'post',
+          url: '/api/get_orders_by_date',
+          data: {
+            'from': timespan[0],
+            'to': timespan[1]
+          },
+          withCredentials: true
+        }).then(response => {
+          console.log('DATE\n', response)
+          this.books_rec = response.data
+        })
+      } else {
+        this.$axios({
+          method: 'get',
+          url: '/api/get_my_orders',
+          withCredentials: true
+        }).then(response => {
+          console.log('API response\n', response)
+          this.books_rec = response.data
+        })
+      }
     }
   },
   mounted () {
-    if (this.keyword === '-') {
-      this.keyword = '请输入关键字'
-    }
+    this.$axios({
+      method: 'get',
+      url: '/api/get_my_orders',
+      withCredentials: true
+    }).then(response => {
+      console.log('API response\n', response)
+      this.books_rec = response.data
+    })
+    this.$axios({
+      method: 'get',
+      url: '/api/get_my_info',
+      withCredentials: true
+    }).then(response => {
+      console.log('API response\n', response)
+      this.myName = response.data.username
+      this.myEmail = response.data.email
+      if (response.data.avatar_path === 'none') {
+        this.myAvatar = 'https://i.loli.net/2017/08/21/599a521472424.jpg'
+      } else {
+        this.myAvatar = response.data.avatar_path
+      }
+    })
+    this.$axios({
+      method: 'post',
+      url: '/api/find_book_with_page',
+      data: {
+        'offset': 0,
+        'limit': 5
+      },
+      withCredentials: true
+    }).then(response => {
+      this.book_collect = response.data
+    })
   },
   data () {
     return {
-      keyword: this.$route.params.keyword,
+      myName: null,
+      myAvatar: null,
+      myEmail: null,
       time_span: null,
       books_rec: [
         {
-          name: 'Yukio Mishima',
-          pic: require('../../../../assets/book1.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559604057,
-          price: 1
-        },
-        {
-          name: 'The Night Ocean',
-          pic: require('../../../../assets/book2.jpg'),
-          time: '2019/01/06',
-          ISBN: 9787559604017,
-          price: 2
-        },
-        {
-          name: 'Obsessed',
-          pic: require('../../../../assets/book3.jpg'),
-          time: '2018/12/03',
-          ISBN: 9787559632127,
-          price: 3
-        },
-        {
-          name: 'MUSKULATUREN',
-          pic: require('../../../../assets/book4.jpg'),
-          time: '2019/01/03',
-          ISBN: 9787559604051,
-          price: 4
-        },
-        {
-          name: 'Surface Breaks',
-          pic: require('../../../../assets/book5.jpg'),
-          time: '2019/03/22',
-          ISBN: 9787559604123,
-          price: 5
-        },
-        {
-          name: 'The Transcriptionist',
-          pic: require('../../../../assets/book6.jpg'),
-          time: '2018/11/11',
-          ISBN: 9787559604012,
-          price: 6
-        },
-        {
-          name: 'Mothers Stories',
-          pic: require('../../../../assets/book7.jpg'),
-          time: '2018/12/13',
-          ISBN: 9787559605442,
-          price: 7
-        },
-        {
-          name: 'Embodied Hope',
-          pic: require('../../../../assets/book8.jpg'),
-          time: '2019/03/23',
-          ISBN: 9787559604023,
-          price: 8
+          buyer: {username: null},
+          finish_at: ' '
         }
       ],
       book_collect: [
         {
-          name: 'MUSKULATUREN',
-          pic: require('../../../../assets/book4.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559604051,
-          price: 4
-        },
-        {
-          name: 'Surface Breaks',
-          pic: require('../../../../assets/book5.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559604123,
-          price: 5
-        },
-        {
-          name: 'The Transcriptionist',
-          pic: require('../../../../assets/book6.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559604012,
-          price: 6
-        },
-        {
-          name: 'Mothers Stories',
-          pic: require('../../../../assets/book7.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559605442,
-          price: 7
-        },
-        {
-          name: 'Embodied Hope',
-          pic: require('../../../../assets/book8.jpg'),
-          time: '2019/02/03',
-          ISBN: 9787559604023,
-          price: 8
+          cover_path: '',
+          isbn: null
         }
       ]
     }
@@ -214,4 +187,7 @@ export default {
     justify-content: center;
     top: 0;
   }
+  /*.ivu-card-body{*/
+    /*padding: 5px;*/
+  /*}*/
 </style>

@@ -24,7 +24,7 @@ export default {
     return {
       columns: [
         {
-          width: '150px',
+          width: '100px',
           padding: '0px',
           title: 'Cover',
           key: 'pic',
@@ -51,7 +51,7 @@ export default {
                       this.$router.push({
                         name: 'book',
                         params: {
-                          id: params.row.isbn
+                          id: params.row.book.isbn
                         }
                       })
                     }
@@ -62,7 +62,7 @@ export default {
                 }, [
                   h('img', {
                     attrs: {
-                      src: params.row.cover_path
+                      src: params.row.book.cover_path
                     },
                     style: {
                       width: '120px'
@@ -75,7 +75,6 @@ export default {
         },
         {
           title: 'Name',
-          width: '350px',
           key: 'name',
           sortable: true,
           render: (h, params) => {
@@ -87,13 +86,12 @@ export default {
                   fontWeight: 'bolder'
                 }
               },
-              params.row.name)
+              params.row.book.name)
             ]
           }
         },
         {
-          title: 'Price',
-          width: '150px',
+          title: 'Bought at',
           key: 'price',
           sortable: true,
           render: (h, params) => {
@@ -104,7 +102,22 @@ export default {
                   fontSize: '40px'
                 }
               },
-              params.row.price + ('¥'))]
+              params.row.curr_price + ('¥'))]
+          }
+        },
+        {
+          title: 'Amount',
+          key: 'price',
+          sortable: true,
+          render: (h, params) => {
+            return [
+              h('div', {
+                style: {
+                  width: '100%',
+                  fontSize: '40px'
+                }
+              },
+              params.row.amount)]
           }
         },
         {
@@ -116,7 +129,7 @@ export default {
               style: {
                 fontSize: '20px'
               }
-            }, params.row.author)
+            }, params.row.book.author)
           }
         },
         {
@@ -127,12 +140,11 @@ export default {
               style: {
                 fontSize: '20px'
               }
-            }, params.row.intro)
+            }, params.row.book.intro)
           }
         },
         {
           title: 'ISBN',
-          width: '150px',
           key: 'ISBN',
           sortable: true,
           render: (h, params) => {
@@ -140,20 +152,7 @@ export default {
               style: {
                 fontSize: '18px'
               }
-            }, params.row.isbn)
-          }
-        },
-        {
-          title: 'Invertory',
-          width: '160px',
-          key: 'price',
-          sortable: true,
-          render: (h, params) => {
-            return h('div', {
-              style: {
-                fontSize: '18px'
-              }
-            }, params.row.inventory)
+            }, params.row.book.isbn)
           }
         }
       ]
@@ -164,6 +163,7 @@ export default {
       type: Array,
       default: () => []
     }
-  }
+  },
+  name: 'booksInOrder'
 }
 </script>

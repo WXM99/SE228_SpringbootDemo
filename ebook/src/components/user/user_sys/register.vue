@@ -38,7 +38,7 @@
         <Row>
           <FormItem prop="mail" style="width: 80%;">
             <Input v-model="formInline.mail" placeholder="E-mail">
-              <Icon type="ios-lock-outline" slot="prepend"></Icon>
+              <Icon type="ios-mail-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
         </Row>
@@ -67,7 +67,23 @@
         title="注册 > 用户名确认"
         @on-ok="ok">
         <h1 style="text-align: center">您确定将要采用以下用户名吗?</h1>
-        <h1 class="reg-username" style="text-align: center; font-size: 50px"></h1>
+        <h1 style="text-align: center; font-size: 50px">{{this.formInline.user}}</h1>
+      </Modal>
+
+      <Modal
+        v-model="modal2"
+        title="注册 > 注册失败"
+      >
+        <h1 style="text-align: center">用户名或邮箱已注册，请修改信息。</h1>
+      </Modal>
+
+      <Modal
+        v-model="modal3"
+        title="注册 > 注册成功"
+        @on-ok="to_login">
+        <h1 style="text-align: center">注册成功！这是您的用户名：</h1>
+        <h1 style="text-align: center; font-size: 50px">{{this.formInline.user}}</h1>
+        <p style="text-align: center; font-size: 25px">点击确认登录该账号</p>
       </Modal>
     </Col>
   </div>
@@ -79,15 +95,17 @@ export default {
   data () {
     const validatePassCheck = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Please enter your password again'))
+        callback(new Error('请重新输入密码！'))
       } else if (value !== this.formInline.password) {
-        callback(new Error('The two input passwords do not match!'))
+        callback(new Error('密码不一致！'))
       } else {
         callback()
       }
     }
     return {
       modal1: false,
+      modal2: false,
+      modal3: false,
       formInline: {
         user: '',
         password: '',
@@ -96,18 +114,18 @@ export default {
       },
       ruleInline: {
         user: [
-          { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+          { required: true, message: '请填写用户名', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: 'Please fill in the password.', trigger: 'blur' },
-          { type: 'string', min: 1, message: 'The password length cannot be less than 1 bits', trigger: 'blur' }
+          { required: true, message: '请填写密码', trigger: 'blur' },
+          { type: 'string', min: 1, message: '密码太短', trigger: 'blur' }
         ],
         passwdCheck: [
           {validator: validatePassCheck, trigger: 'blur'}
         ],
         mail: [
-          { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-          { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+          { required: true, message: '请填写邮箱', trigger: 'blur' },
+          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ]
       }
     }
@@ -116,7 +134,6 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          document.querySelector('.reg-username').innerHTML = this.formInline.user
           this.modal1 = true
         } else {
           this.$Message.error('请完善信息!')
@@ -124,6 +141,29 @@ export default {
       })
     },
     ok () {
+      // this.$router.push({path: '/user/login'})
+      // console.log(this.formInline)
+      this.$axios({
+        method: 'post',
+        url: '/register',
+        data: {
+          'username': this.formInline.user,
+          'password': this.formInline.password,
+          'email': this.formInline.mail,
+          'avatar_path': 'none'
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('API response\n', response)
+        let status = response.data.state
+        if (status === 1) {
+          this.modal3 = true
+        } else {
+          this.modal2 = true
+        }
+      })
+    },
+    to_login () {
       this.$router.push({path: '/user/login'})
     }
   }

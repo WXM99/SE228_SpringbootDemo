@@ -36,4 +36,16 @@ public class BookInfoController {
         return this.bookService.findBook(input);
     }
 
+    @RequestMapping(value = "/find_book_with_page", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public List<BookInfoBrief> find_book_with_page(@RequestBody JSONObject input) throws IOException {
+        return this.bookService.findBookWithPage(input);
+    }
+
+    @RequestMapping(value = "/search_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public List<BookInfoBrief> search_book(@RequestBody JSONObject input) throws IOException {
+        return this.bookService.searchBook(input);
+    }
+
 }

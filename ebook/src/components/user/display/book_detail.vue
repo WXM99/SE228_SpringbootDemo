@@ -3,21 +3,23 @@
     <Card class="detail">
     <Row type="flex" justify="center" align="middle" class="code-row-bg">
       <Col span="8">
-        <img :src="this.book_info.pic" class="book-cover">
+        <img :src="this.book_info.cover_path" class="book-cover">
       </Col>
       <Col span="15" offset="1">
-        <Row><h1 class="book-title">{{this.book_info.name}}<p style="float: right">&nbsp;{{this.book_info.price}}.00¥</p></h1></Row>
+        <Row><h1 class="book-title">{{this.book_info.name}}<p style="float: right; margin-right: 100px">&nbsp;{{this.book_info.price}}¥</p></h1></Row>
         <Row class="info-box">
           <p class="info-item">作者: {{this.book_info.author}}</p>
-          <p class="info-item">出版社: {{this.book_info.press}}</p>
+          <!--<p class="info-item">出版社: {{this.book_info.press}}</p>-->
           <p class="info-item" v-if="this.book_info.ori_name !== null">原名: {{this.book_info.ori_name}}</p>
           <p class="info-item" v-if="this.book_info.translator !== null">译者: {{this.book_info.translator}}</p>
-          <p class="info-item">出版时间: {{this.book_info.publish_time}}</p>
+          <p class="info-item" v-if="this.book_info.publish_time !== null">出版时间: {{this.book_info.publish_time}}</p>
           <p class="info-item">ISBN: {{this.book_info.ISBN}}</p>
+          <p class="info-item">库存: {{this.book_info.inventory}}</p>
+          <p class="info-item">简介: {{this.book_info.intro}}</p>
         </Row>
-        <Row><Tag v-for="tag in this.book_info.tags" :key="tag" style="font-size: 16px">{{tag}}</Tag></Row>
+        <Row><Tag v-for="tag in this.book_info.tags" :key="tag" style="font-size: 16px; margin-top: 50px">{{tag}}</Tag></Row>
         <Row>
-          <Col span="12" offset="6"><Button type="primary" style="width: 100%; height: 50px; margin-top: 20px; font-size: 30px; line-height: 30px" @click="buy">加入购物车</Button></Col>
+          <Col span="12" offset="6"><Button type="primary" style="width: 100%; height: 50px; margin-top: 70px; font-size: 30px; line-height: 30px;" @click="buy">加入购物车</Button></Col>
         </Row>
       </Col>
     </Row>
@@ -36,12 +38,12 @@
         读者鉴
         <div slot="content">
           <div>
-            <Card v-for="cm in this.book_info.comments" :key="cm.name">
+            <Card v-for="cm in this.book_info.comments" :key="cm.name" style="padding: 0 50px">
               <Row>
                 <Col span="4"><p style="font-size: 18px">{{cm.name}}</p></Col>
-                <Col span="5" offset="15" style="margin-top: -5px"><Rate disabled v-model="cm.scores" /></Col>
+                <Col span="5" offset="0" style="margin-top: -5px"><Rate disabled v-model="cm.scores" /></Col>
               </Row>
-              <p>{{cm.content}}</p>
+              <p style="text-align: left; margin-top: 20px">{{cm.content}}</p>
             </Card>
           </div>
         </div>
@@ -54,32 +56,66 @@ import store from '../../../main'
 export default {
   methods: {
     buy: function () {
-      store.commit('addBook', this.book_info)
-      store.commit('update', 0)
-      this.$Notice.success({
-        title: '《' + this.book_info.name + '》已加入购物车',
-        desc: '作者: ' + this.book_info.author + ' 价格: ' + this.book_info.price + '元'
+      this.$axios({
+        method: 'post',
+        url: '/api/add_to_cart',
+        data: {
+          'isbn': Number(this.book_info.ISBN)
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('ADDED: \n', response)
+        this.$Notice.success({
+          title: '《' + this.book_info.name + '》已加入购物车',
+          desc: '作者: ' + this.book_info.author + ' 价格: ' + this.book_info.price + '元'
+        })
       })
     }
   },
   component: {
     store
   },
+  mounted () {
+    this.$axios({
+      method: 'post',
+      url: '/api/find_book',
+      data: {
+        'isbn': Number(this.$route.params.id)
+      },
+      withCredentials: true
+    }).then(response => {
+      console.log('response\n', response)
+      if (response.data.state === 1) {
+        this.book_info.author = response.data.author
+        this.book_info.cover_path = response.data.cover_path
+        this.book_info.intro = response.data.intro
+        this.book_info.inventory = response.data.inventory
+        this.book_info.name = response.data.name
+        this.book_info.price = response.data.price
+      } else {
+        this.$Notice.error({
+          title: '404错误',
+          desc: this.$route.params.id + '不是已收录的图书ISBN。'
+        })
+        this.$router.push({path: '/'})
+      }
+    })
+  },
   data () {
     return {
       id: this.$route.params.id,
       book_info: {
-        name: '摇摆',
-        author: '[日]西川美和',
-        press: '北京十月文艺出版社',
-        ori_name: 'ゆれる',
-        translator: '崔健',
-        publish_time: '2019-3-1',
-        pages: 123,
-        price: 45.00,
-        ISBN: '9787530218853',
-        ammount: 1,
-        pic: require('../../../assets/book8.jpg'),
+        name: '',
+        author: '',
+        price: 0,
+        ISBN: this.$route.params.id,
+        inventory: 0,
+        ori_name: null,
+        press: null,
+        intro: '',
+        cover_path: null,
+        translator: null,
+        publish_time: null,
         details: '★是枝裕和、小田切让、香川照之倾力推荐！\n' +
           '\n' +
           '★11项电影大奖导演西川美和成名作\n' +
@@ -173,7 +209,7 @@ export default {
     padding: 10px;
   }
   .book-cover{
-    width: 100%;
+    width: 80%;
   }
   .info-box{
     border-left: solid #cacaca 1px;
@@ -189,5 +225,9 @@ export default {
     text-align: left;
     white-space: pre-line;
     font-size: 16px;
+    padding: 0 50px;
+  }
+  .ivu-collapse-content-box{
+    padding: 0 50px;
   }
 </style>

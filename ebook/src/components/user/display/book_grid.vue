@@ -1,12 +1,12 @@
 <template>
   <div>
   <Row>
-    <Col span="5" offset="0" v-for="book in this.books" :key="book.id" style="margin-bottom: 30px; margin-left: 3%">
+    <Col span="5" offset="0" v-for="book in this.books" :key="book.isbn" style="margin-bottom: 30px; margin-left: 3%">
       <Card>
-        <img :src="book.pic" style="width: 100%; height: 23vw" @click="viewBook(book.id)"/>
+        <img :src="book.cover_path" style="width: 100%; height: 23vw" @click="viewBook(book.isbn)"/>
         <Row>
         <p style="font-size: 16px; font-weight: bold" @click="changeColor($event)">{{book.name}}</p>
-        <p>{{book.prop}}</p>
+        <p>{{book.intro}}</p>
         </Row>
       </Card>
     </Col>

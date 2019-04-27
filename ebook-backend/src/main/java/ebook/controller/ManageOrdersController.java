@@ -34,7 +34,7 @@ public class ManageOrdersController {
 
     @RequestMapping(value = "/get_orders_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<BookInfoBrief> get_users_book(@RequestBody JSONObject input) throws IOException {
+    public List<BookInOrder> get_users_book(@RequestBody JSONObject input) throws IOException {
         return this.manageOrderService.orderBooks(input);
     }
 

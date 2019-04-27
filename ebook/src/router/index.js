@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Cookies from 'js-cookie'
 
 Vue.use(Router)
 function loadView (view) {
@@ -8,7 +9,7 @@ function loadView (view) {
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   // ordinary user pages
   routes: [
     {
@@ -97,3 +98,25 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && to.name !== 'register' && to.name.substr(0, 2) !== 'ad') {
+    const isLogin = Cookies.get('login')
+    if (isLogin === 'USER' || isLogin === 'ADMIN') {
+      next()
+    } else {
+      router.push({name: 'login'})
+    }
+  } else if (to.name.substr(0, 2) === 'ad') {
+    const isLogin = Cookies.get('login')
+    if (isLogin === 'ADMIN') {
+      next()
+    } else {
+      router.push({name: 'homepage'})
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

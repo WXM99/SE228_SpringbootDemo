@@ -55,33 +55,44 @@ login page
       </Form>
     </Col>
     <Modal
-      v-model="modal1"
+      v-model="model1"
       title="提示">
-      <h1 style="text-align: center">您的账号已被管理员禁止!</h1>
+      <h1 style="text-align: center">密码错误！</h1>
+    </Modal>
+    <Modal
+      v-model="model2"
+      title="提示">
+      <h1 style="text-align: center">用户名"{{this.formInline.user}}"不存在，请先注册。</h1>
+    </Modal>
+    <Modal
+      v-model="model3"
+      title="提示">
+      <h1 style="text-align: center">用户"{{this.formInline.user}}"被管理员禁封，无法登陆！</h1>
     </Modal>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import Cookies from 'js-cookie'
 export default {
   components: {
   },
   mounted () {
-    this.$axios({
-      method: 'post',
-      url: '/login',
-      data: this.formInline,
-      withCredentials: true
-    }).then(response => {
-      console.log('API: /login/submit/\n', response)
-    })
+    let isLogin = Cookies.get('login')
+    if (isLogin === 'ADMIN') {
+      this.$router.push({name: 'ad_index'})
+    } else if (isLogin === 'USER') {
+      this.$router.push({name: 'homepage'})
+    }
   },
   comments: {
     axios
   },
   data () {
     return {
-      modal1: false,
+      model1: false,
+      model2: false,
+      model3: false,
       formInline: {
         user: '',
         password: ''
@@ -99,16 +110,45 @@ export default {
   },
   methods: {
     handleSubmit (name) {
+      // console.log(this.formInline)
       this.$refs[name].validate((valid) => {
         if (valid) {
-          console.log(this.formInline.user)
-          if (this.formInline.user === 'forbidden') {
-            this.modal1 = true
-          } else if (this.formInline.user === 'admin') {
-            this.$router.push({path: '/admin'})
-          } else {
-            this.$router.push({path: '/'})
-          }
+          this.$axios({
+            method: 'post',
+            url: '/login',
+            dataType: 'application/x-www-form-urlencoded',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: {'username': this.formInline.user, 'password': this.formInline.password},
+            withCredentials: true
+          }).then(response => {
+            // console.log('API: /login/submit/\n', response)
+            if (response.data.status === 200 && response.data.roles === '[USER]') {
+              Cookies.set('login', 'USER', { expires: 1, path: '' })
+              this.$router.push({path: '/'})
+            } else if (response.data.status === 200 && response.data.roles === '[ROLE_ADMIN]') {
+              Cookies.set('login', 'ADMIN', { expires: 1, path: '' })
+              this.$router.push({path: '/admin'})
+            } else {
+              this.$axios({
+                method: 'post',
+                url: '/api/find_a_user',
+                data: {'username': this.formInline.user},
+                withCredentials: true
+              }).then(response => {
+                console.log('API: /login/submit/\n', response)
+                let status = response.data.state
+                if (status === 404) {
+                  this.model2 = true
+                } else if (status === 1) {
+                  this.model1 = true
+                } else {
+                  this.model3 = true
+                }
+              })
+            }
+          })
         } else {
           this.$Message.error('请完善信息!')
         }

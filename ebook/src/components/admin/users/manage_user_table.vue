@@ -49,8 +49,7 @@
     </Modal>
     <Modal
       v-model="inspect_modal"
-      width="1100"
-    >
+      width="1100">
       <div slot="header" style="font-size: 30px; text-align: center">订单记录</div>
       <div>
         <h1 style="text-align: center">ID: {{this.inspect_user.id}} 用户名: {{this.inspect_user.name}}</h1>

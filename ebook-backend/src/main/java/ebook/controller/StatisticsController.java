@@ -1,6 +1,7 @@
 package ebook.controller;
 
 
+import ebook.model.BookInOrder;
 import ebook.model.BookInfoBrief;
 import ebook.model.Orders;
 import ebook.service.ManageOrderService;
@@ -33,7 +34,7 @@ public class StatisticsController {
 
     @RequestMapping(value = "/get_order_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<BookInfoBrief> get_user_book(@RequestBody JSONObject input) throws IOException {
+    public List<BookInOrder> get_user_book(@RequestBody JSONObject input) throws IOException {
         return this.manageOrderService.orderBooks(input);
     }
 }

@@ -37,6 +37,12 @@ public class ManageBookController {
         return this.manageBookService.addBook(new_book);
     }
 
+    @RequestMapping(value = "/update_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public BookInfoBrief update_book(@RequestBody JSONObject new_book) throws IOException {
+        return this.manageBookService.updateBook(new_book);
+    }
+
     @RequestMapping(value = "/delete_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public BookInfoBrief delete_book(@RequestBody JSONObject input) throws IOException {

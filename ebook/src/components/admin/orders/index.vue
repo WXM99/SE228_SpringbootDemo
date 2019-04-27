@@ -13,9 +13,11 @@
 </template>
 <script>
 import orderTable from './order_table'
+import orderBook from '../books/book_in_order'
 export default {
   components: {
-    orderTable
+    orderTable,
+    orderBook
   },
   methods: {
   },
