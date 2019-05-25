@@ -56,4 +56,9 @@ public class ManageUserServiceImp implements ManageUserService {
         int limit = (int) input.get("limit");
         return this.userRepository.find_with_page(new PageRequest(offset, limit));
     }
+
+    public List<UserEntity> searchUser(JSONObject input) {
+        String username = (String) input.get("username");
+        return this.userRepository.searchUser(username);
+    }
 }

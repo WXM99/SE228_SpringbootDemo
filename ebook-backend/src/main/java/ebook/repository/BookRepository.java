@@ -14,7 +14,7 @@ public interface BookRepository extends JpaRepository<BookInfoBrief, Integer> {
     List<BookInfoBrief> findAll();
     BookInfoBrief save(BookInfoBrief book);
     BookInfoBrief findByIsbn(Long isbn);
-    @Query("SELECT b FROM BookInfoBrief b ORDER BY isbn")
+    @Query("SELECT b FROM BookInfoBrief b WHERE b.state <> -1 ORDER BY isbn")
     List<BookInfoBrief> find_with_page(Pageable pageable);
     @Query("SELECT b FROM BookInfoBrief b WHERE b.name LIKE %:key% ORDER BY isbn")
     List<BookInfoBrief> search_book(@Param("key") String key);

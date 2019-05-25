@@ -2,9 +2,10 @@ package ebook.controller;
 
 
 import ebook.model.BookInOrder;
-import ebook.model.BookInfoBrief;
 import ebook.model.Orders;
+import ebook.model.UserEntity;
 import ebook.service.ManageOrderService;
+import ebook.service.ManageUserService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ import java.util.Set;
 public class StatisticsController {
     @Autowired
     private ManageOrderService manageOrderService;
+    @Autowired
+    private ManageUserService manageUserService;
 
     @RequestMapping(value = "/get_user_order", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
@@ -36,5 +39,11 @@ public class StatisticsController {
     @ResponseBody
     public List<BookInOrder> get_user_book(@RequestBody JSONObject input) throws IOException {
         return this.manageOrderService.orderBooks(input);
+    }
+
+    @RequestMapping(value = "/search_user", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public List<UserEntity> search_user(@RequestBody JSONObject input) throws IOException {
+        return this.manageUserService.searchUser(input);
     }
 }

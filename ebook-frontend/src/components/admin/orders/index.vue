@@ -2,7 +2,7 @@
   <div style="margin-top: 80px">
     <p class="search-title">订单管理</p>
     <Row align="middle" style="margin-top: 20px">
-      <Col span="12" offset="6"><Input search enter-button placeholder="订单搜索" style="border-color:  #acc6aa"/></Col>
+      <Col span="12" offset="6"><Input search enter-button placeholder="输入ISBN" style="border-color:  #acc6aa" v-model="book_name" @on-search="search"/></Col>
     </Row>
     <!--<Divider orientation="left" class="prop">关键字: {{keyword}}</Divider>-->
     <Card style="padding: 10px; margin: 30px" >
@@ -20,93 +20,27 @@ export default {
     orderBook
   },
   methods: {
+    search () {
+      console.log(this.book_name)
+      this.$axios({
+        method: 'post',
+        url: '/admin/get_book_order',
+        data: {
+          'isbn': Number(this.book_name)
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('API response\n', response)
+        this.books_orders = response.data
+      })
+    }
   },
   mounted () {
   },
   data () {
     return {
-      books_orders: [
-        {
-          order_id: 1,
-          state: 0,
-          bookISBN: 9891234124321,
-          buyer_id: 1,
-          ammount: 1,
-          time: '2019/02/01'
-        },
-        {
-          order_id: 2,
-          state: 0,
-          bookISBN: 9891234125131,
-          buyer_id: 2,
-          ammount: 1,
-          time: '2019/03/01'
-        },
-        {
-          order_id: 3,
-          state: 0,
-          bookISBN: 9891234124321,
-          buyer_id: 2,
-          ammount: 1,
-          time: '2019/03/08'
-        },
-        {
-          order_id: 4,
-          state: 0,
-          bookISBN: 9891234124321,
-          buyer_id: 8,
-          ammount: 1,
-          time: '2019/03/08'
-        },
-        {
-          order_id: 5,
-          state: 0,
-          bookISBN: 1291234124321,
-          buyer_id: 1,
-          ammount: 1,
-          time: '2019/03/11'
-        },
-        {
-          order_id: 6,
-          state: 0,
-          bookISBN: 9842234124321,
-          buyer_id: 5,
-          ammount: 2,
-          time: '2019/03/12'
-        },
-        {
-          order_id: 7,
-          state: 0,
-          bookISBN: 9891555124321,
-          buyer_id: 1,
-          ammount: 10,
-          time: '2018/11/11'
-        },
-        {
-          order_id: 8,
-          state: 0,
-          bookISBN: 9891234123451,
-          buyer_id: 2,
-          ammount: 11,
-          time: '2018/11/11'
-        },
-        {
-          order_id: 9,
-          state: 0,
-          bookISBN: 9891231234321,
-          buyer_id: 3,
-          ammount: 4,
-          time: '2018/12/01'
-        },
-        {
-          order_id: 10,
-          state: 0,
-          bookISBN: 9891235624321,
-          buyer_id: 4,
-          ammount: 1,
-          time: '2019/02/11'
-        }
-      ]
+      book_name: '',
+      books_orders: []
     }
   }
 }

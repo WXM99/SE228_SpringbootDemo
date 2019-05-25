@@ -23,29 +23,32 @@
   <Modal
     v-model="md_modal"
     @on-ok="md_ok">
-    <div slot="header" style="font-size: 30px; text-align: center">请修改《{{this.data_in[md_book_idx].name}}》信息</div>
+    <div slot="header" style="font-size: 30px; text-align: center" >请修改《{{this.md_book.name}}》信息</div>
     <div style="text-align: center">
       <Row align="middle" type="flex" >
         <Col span="3" style="font-size: 12px;">Cover</Col>
         <Col offset="6">
-          <img :src="this.md_book.pic" style="height: 250px; border: solid 5px #ccc; box-shadow: 0px 0px 5px #ccc; margin-bottom: 20px">
+          <img :src="this.md_book.cover_path" style="height: 250px; border: solid 5px #ccc; box-shadow: 0px 0px 5px #ccc; margin-bottom: 20px">
         </Col>
       </Row>
       <Form :model="md_book" label-position="right" :label-width="100" style="margin-left: -40px">
         <FormItem label="Name">
           <Input v-model="md_book.name"></Input>
         </FormItem>
+        <FormItem label="Author">
+          <Input v-model="md_book.author"></Input>
+        </FormItem>
         <FormItem label="Price">
           <Input v-model="md_book.price"></Input>
         </FormItem>
         <FormItem label="ISBN">
-          <Input v-model="md_book.ISBN"></Input>
+          <Input v-model="md_book.isbn" :disabled="true"></Input>
         </FormItem>
         <FormItem label="Intro">
-          <Input v-model="md_book.prop"></Input>
+          <Input v-model="md_book.intro"></Input>
         </FormItem>
         <FormItem label="Inventory">
-          <Input v-model="md_book.price"></Input>
+          <Input v-model="md_book.inventory"></Input>
         </FormItem>
       </Form>
     </div>
@@ -53,7 +56,7 @@
     <Modal
       v-model="de_modal"
       @on-ok="de_ok">
-      <div style="font-size: 30px; text-align: center">确定删除《{{this.data_in[this.de_book_idx].name}}》吗?</div>
+      <div style="font-size: 30px; text-align: center" >确定删除《{{this.de_book.name}}》吗?</div>
     </Modal>
   </div>
 </template>
@@ -66,10 +69,10 @@ export default {
       de_modal: false,
       columns: [
         {
-          width: '150px',
-          padding: '0px',
+          width: '100px',
+          padding: '15px',
           title: 'Cover',
-          key: 'pic',
+          key: 'isbn',
           render: (h, params) => {
             return [
               h('Tooltip', {
@@ -93,7 +96,7 @@ export default {
                       this.$router.push({
                         name: 'book',
                         params: {
-                          id: params.row.ISBN
+                          id: params.row.isbn
                         }
                       })
                     }
@@ -104,7 +107,7 @@ export default {
                 }, [
                   h('img', {
                     attrs: {
-                      src: params.row.pic
+                      src: params.row.cover_path
                     },
                     style: {
                       width: '120px'
@@ -123,7 +126,6 @@ export default {
             return [
               h('div', {
                 style: {
-                  width: '100%',
                   fontSize: '30px',
                   fontWeight: 'bolder'
                 }
@@ -141,24 +143,23 @@ export default {
             return [
               h('div', {
                 style: {
-                  width: '100%',
-                  fontSize: '40px'
+                  fontSize: '30px'
                 }
               },
-              params.row.price + ('.00¥'))]
+              params.row.price + ('¥'))]
           }
         },
         {
           title: 'Author',
           width: '180px',
-          key: 'name',
+          key: 'author',
           sortable: true,
           render: (h, params) => {
             return h('div', {
               style: {
                 fontSize: '20px'
               }
-            }, params.row.name)
+            }, params.row.author)
           }
         },
         {
@@ -171,7 +172,7 @@ export default {
               style: {
                 fontSize: '18px'
               }
-            }, params.row.ISBN)
+            }, params.row.isbn)
           }
         },
         {
@@ -184,7 +185,7 @@ export default {
               style: {
                 fontSize: '18px'
               }
-            }, params.row.price)
+            }, params.row.inventory)
           }
         },
         {
@@ -201,11 +202,21 @@ export default {
       md_book: {
         name: '',
         price: 0,
-        ISBN: '',
-        prop: '',
-        pic: ''
+        isbn: 0,
+        intro: '',
+        cover_path: '',
+        inventory: 0,
+        author: ''
       },
-      de_book: null
+      de_book: {
+        name: '',
+        price: 0,
+        isbn: 0,
+        intro: '',
+        cover_path: '',
+        inventory: 0,
+        author: ''
+      }
     }
   },
   props: {
@@ -222,11 +233,27 @@ export default {
     },
     md_ok: function () {
       this.data_in[this.md_book_idx] = this.md_book
-      this.$Notice.success({
-        title: '修改成功!',
-        desc: '已经为《' + this.md_book.name + '》更新了信息.'
+      let tarbook = this.md_book
+      this.$axios({
+        method: 'post',
+        url: '/admin/update_book',
+        data: {
+          'isbn': tarbook.isbn,
+          'name': tarbook.name,
+          'price': Number(tarbook.price),
+          'inventory': String(tarbook.inventory),
+          'author': tarbook.author,
+          'cover_path': tarbook.cover_path,
+          'intro': tarbook.intro
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('API response\n', response)
+        this.$Notice.success({
+          title: '修改成功!',
+          desc: '已经为《' + this.md_book.name + '》更新了信息.'
+        })
       })
-      console.log(typeof this.md_book.pic)
     },
     delete_bk: function (index) {
       this.de_modal = true
@@ -234,10 +261,20 @@ export default {
       this.de_book_idx = index
     },
     de_ok: function () {
-      this.data_in.splice(this.de_book_idx, 1)
-      this.$Notice.success({
-        title: '删除成功!',
-        desc: '已经删除了《' + this.de_book.name + '》.'
+      this.$axios({
+        method: 'post',
+        url: '/admin/delete_book',
+        data: {
+          'isbn': this.de_book.isbn
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('API response\n', response)
+        this.data_in.splice(this.de_book_idx, 1)
+        this.$Notice.success({
+          title: '删除成功!',
+          desc: '已经删除了《' + this.de_book.name + '》.'
+        })
       })
     }
   }

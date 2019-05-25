@@ -25,7 +25,7 @@ public class ManageBookServiceImp implements ManageBookService {
         String author = (String) new_book.get("author");
         String cover_path = (String) new_book.get("cover_path");
         String intro = (String) new_book.get("intro");
-        Long isbn = new Long((Integer)new_book.get("isbn"));
+        Long isbn = Long.parseLong( (String)new_book.get("isbn") );
         Double price = (Double) new_book.get("price");
         Integer inventory = (Integer) new_book.get("inventory");
 
@@ -69,7 +69,7 @@ public class ManageBookServiceImp implements ManageBookService {
         String intro = (String) new_book.get("intro");
         Long isbn = new Long((Integer)new_book.get("isbn"));
         Double price = (Double) new_book.get("price");
-        Integer inventory = (Integer) new_book.get("inventory");
+        Integer inventory = Integer.parseInt((String) new_book.get("inventory"));
 
         BookInfoBrief find_add = this.bookRepository.findByIsbn(isbn);
         if (find_add != null) {

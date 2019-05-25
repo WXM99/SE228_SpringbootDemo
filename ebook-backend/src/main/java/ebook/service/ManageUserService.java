@@ -12,4 +12,6 @@ public interface ManageUserService {
     UserEntity freeUser(JSONObject name);
 
     List<UserEntity> findUserWithPage(JSONObject input);
+
+    List<UserEntity> searchUser(JSONObject input);
 }

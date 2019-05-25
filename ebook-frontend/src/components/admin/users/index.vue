@@ -2,11 +2,12 @@
   <div style="margin-top: 80px">
     <p class="search-title">用户管理</p>
     <Row align="middle" style="margin-top: 20px">
-      <Col span="12" offset="6"><Input search enter-button placeholder="用户搜索" style="border-color:  #acc6aa"/></Col>
+      <Col span="12" offset="6">
+        <Input search enter-button placeholder="用户搜索" style="border-color:  #acc6aa" v-model="keywords" @on-search="search"/></Col>
     </Row>
     <!--<Divider orientation="left" class="prop">关键字: {{keyword}}</Divider>-->
     <Card style="padding: 10px; margin: 30px" >
-      <user-table :data_in="books_rec"></user-table>
+      <user-table :data_in="users"></user-table>
       <Page :total="100" style="margin-top: 10px"/>
     </Card>
   </div>
@@ -18,67 +19,38 @@ export default {
     userTable
   },
   methods: {
+    search () {
+      this.$axios({
+        method: 'post',
+        url: '/admin/search_user',
+        data: {
+          'username': this.keywords
+        },
+        withCredentials: true
+      }).then(response => {
+        console.log('API response\n', response)
+        this.users = response.data
+      })
+    }
   },
   mounted () {
+    this.$axios({
+      method: 'post',
+      url: '/admin/get_user_page',
+      data: {
+        'offset': 0,
+        'limit': 999
+      },
+      withCredentials: true
+    }).then(response => {
+      console.log('API response\n', response)
+      this.users = response.data
+    })
   },
   data () {
     return {
-      books_rec: [
-        {
-          name: 'userI',
-          state: 0,
-          email: 'sample1@xx.com',
-          id: 1
-        },
-        {
-          name: 'userII',
-          state: 0,
-          email: 'sample2@xx.com',
-          id: 2
-        },
-        {
-          name: 'userIII',
-          state: 1,
-          email: 'sample3@xx.com',
-          id: 3
-        },
-        {
-          name: 'userIV',
-          state: 0,
-          email: 'sample4@xx.com',
-          id: 4
-        },
-        {
-          name: 'userV',
-          state: 0,
-          email: 'sample5@xx.com',
-          id: 5
-        },
-        {
-          name: 'userVI',
-          state: 0,
-          email: 'sample6@xx.com',
-          id: 6
-        },
-        {
-          name: 'userVII',
-          state: 0,
-          email: 'sample7@xx.com',
-          id: 7
-        },
-        {
-          name: 'userIIX',
-          state: 1,
-          email: 'sample8@xx.com',
-          id: 8
-        },
-        {
-          name: 'userIX',
-          state: 0,
-          email: 'sample9@xx.com',
-          id: 9
-        }
-      ],
+      keywords: '',
+      users: [],
       add_book: {
         name: '',
         price: 0,

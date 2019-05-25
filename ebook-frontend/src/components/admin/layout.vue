@@ -86,7 +86,7 @@
               <div slot="content">
                 <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! 管理员</p></Row>
                 <router-link to="/user/login">
-                  <Button style="margin-bottom: 5px; font-size: 20px; width: 100%">退出登录</Button>
+                  <Button style="margin-bottom: 5px; font-size: 20px; width: 100%" @click="logout">退出登录</Button>
                 </router-link>
               </div>
             </Tooltip>
@@ -101,6 +101,7 @@
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie'
 export default {
   data () {
     return {
@@ -116,6 +117,9 @@ export default {
       } else {
         css.setAttribute('href', './static/light_theme.css')
       }
+    },
+    logout () {
+      Cookies.remove('login')
     }
   },
   components: {
