@@ -1,31 +1,29 @@
 package ebook.model;
 
+import ebook.model.outOfDB.Reply;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@Document(collection = "comments")
 public class Comments {
     @Id
-    public long id;
-    @Field("to_book_isbn")
+    public String id;
     public long isbn;
-    @Field("from_user")
     public String username;
-    @Field("content")
     public String content;
-    @Field("replies")
-    public List<Comments> floors;
+    public List<Reply> floors;
+    public Date time;
 
     public Comments() {
         this.floors = new ArrayList<>();
+        this.time = new Date();
     }
 
     public Comments(long isbn, String username, String content) {
         this.floors = new ArrayList<>();
+        this.time = new Date();
         this.isbn = isbn;
         this.username = username;
         this.content = content;

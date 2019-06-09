@@ -21,6 +21,4 @@ public class BookDetails {
     public String introduction;
     @Field("author_intro")
     public String author_intro;
-    @Field("comments_on")
-    public List<Comments> comments;
 }

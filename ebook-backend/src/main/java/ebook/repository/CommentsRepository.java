@@ -1,7 +1,11 @@
 package ebook.repository;
 
 import ebook.model.Comments;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface CommentsRepository {
-    Comments replyTo(Comments to, Comments content);
+import java.util.List;
+import java.util.Optional;
+
+public interface CommentsRepository extends MongoRepository<Comments, String> {
+    List<Comments> findByIsbn(Long isbn);
 }
