@@ -52,17 +52,17 @@ public class ImageServiceImp implements ImageService {
     @Bean
     MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setLocation("/Users/Miao/Projects/Github/SE228/ebook-backend/src/main/resources/static/");
+        factory.setLocation("/Users/Miao/Projects/Github/SE228/ebook-backend/target/classes/static");
         return factory.createMultipartConfig();
     }
 
-    public ResponseEntity showImg(String fileName){
-
-        System.out.println(fileName);
-        try {
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + "/Users/Miao/Projects/Github/SE228/ebook-backend/src/main/resources/static/" + fileName));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    public ResponseEntity showImg(String fileName){
+//
+//        System.out.println(fileName);
+//        try {
+//            return ResponseEntity.ok(resourceLoader.getResource("file:" + "/Users/Miao/Projects/Github/SE228/ebook-backend/src/main/resources/static/" + fileName));
+//        } catch (Exception e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }

@@ -22,9 +22,9 @@ public class ImagesController {
         return this.imageService.saveImg(file);
     }
 
-    @RequestMapping(value="show", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ResponseBody
-    public ResponseEntity showPhotos(String fileName){
-        return this.imageService.showImg(fileName);
-    }
+//    @RequestMapping(value="show", produces = MediaType.IMAGE_JPEG_VALUE)
+//    @ResponseBody
+//    public ResponseEntity showPhotos(String fileName){
+//        return this.imageService.showImg(fileName);
+//    }
 }

@@ -132,7 +132,7 @@ export default {
       // this.add_book.pic = file.url
       // console.log(res)
       // console.log(file)
-      this.add_book.cover_path = 'http://localhost:8080/show?fileName=' + res
+      this.add_book.cover_path = 'http://localhost:8080/' + res
       // document.querySelector('.el-upload.el-upload--picture-card').style = 'display: none'
     },
     handleRemove () {

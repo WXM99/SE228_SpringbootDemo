@@ -1,7 +1,9 @@
 package ebook.controller;
 
+import ebook.model.BookDetails;
 import ebook.model.BookInOrder;
 import ebook.model.BookInfoBrief;
+import ebook.model.outOfDB.WholeBook;
 import ebook.repository.BookRepository;
 import ebook.service.BookService;
 import net.sf.json.JSONObject;
@@ -36,6 +38,12 @@ public class BookInfoController {
         return this.bookService.findBook(input);
     }
 
+    @RequestMapping(value = "/find_whole_book", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public WholeBook find_whole_book(@RequestBody JSONObject input) throws IOException {
+        return this.bookService.find(input);
+    }
+
     @RequestMapping(value = "/find_book_with_page", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public List<BookInfoBrief> find_book_with_page(@RequestBody JSONObject input) throws IOException {
@@ -46,6 +54,12 @@ public class BookInfoController {
     @ResponseBody
     public List<BookInfoBrief> search_book(@RequestBody JSONObject input) throws IOException {
         return this.bookService.searchBook(input);
+    }
+
+    @RequestMapping(value = "/add_details", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public BookDetails add_details(@RequestBody JSONObject input) throws IOException {
+        return this.bookService.addDetails(input);
     }
 
 }

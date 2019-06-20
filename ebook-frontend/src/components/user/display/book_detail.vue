@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 30px; margin-top: 90px">
+  <div style="margin:90px auto; margin-top: 90px; width: 1000px;">
     <Card class="detail">
     <Row type="flex" justify="center" align="middle" class="code-row-bg">
       <Col span="8">
@@ -38,7 +38,7 @@
         读者鉴
         <div slot="content">
           <div>
-            <Card v-for="cm in this.book_info.comments" :key="cm.name" style="padding: 0 50px">
+            <Card v-for="cm in this.book_info.comments" :key="cm.name" style="padding: 20px 50px; margin: 20px auto; border: 1px solid #eeeeee;">
               <Row>
                 <Col span="4"><p style="font-size: 18px">{{cm.name}}</p></Col>
                 <Col span="5" offset="0" style="margin-top: -5px"><Rate disabled v-model="cm.scores" /></Col>

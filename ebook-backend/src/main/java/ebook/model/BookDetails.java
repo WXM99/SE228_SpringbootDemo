@@ -5,20 +5,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "book_details")
 public class BookDetails {
     @Id
-    public long isbn;
-    @Field("tags")
+    public String id;
+
+    public Long isbn;
     public List<String> tags;
-    @Field("press")
     public String press;
-    @Field("publish_time")
     public String publish_time;
-    @Field("introduction")
     public String introduction;
-    @Field("author_intro")
     public String author_intro;
+
+    public BookDetails(){
+        this.tags = new ArrayList<>();
+    }
+
+    public BookDetails(String press,
+                       String publish_time,
+                       String introduction,
+                       String author_intro,
+                       Long isbn,
+                       ArrayList<String> tags){
+        this.tags = tags;
+        this.author_intro = author_intro;
+        this.introduction = introduction;
+        this.publish_time = publish_time;
+        this.press = press;
+        this.isbn = isbn;
+    }
 }
