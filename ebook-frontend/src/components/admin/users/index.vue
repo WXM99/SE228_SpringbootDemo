@@ -8,7 +8,7 @@
     <!--<Divider orientation="left" class="prop">关键字: {{keyword}}</Divider>-->
     <Card style="padding: 10px; margin: 30px" >
       <user-table :data_in="users"></user-table>
-      <Page :total="100" style="margin-top: 10px"/>
+      <Page :total="10" style="margin-top: 10px"/>
     </Card>
   </div>
 </template>

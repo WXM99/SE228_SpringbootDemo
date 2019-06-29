@@ -65,13 +65,13 @@
             <router-link  to="/admin/order">
               <MenuItem name="1-5">
                 <Icon type="md-reorder" />
-                <span>订单管理</span>
+                <span>图书销量</span>
               </MenuItem>
             </router-link>
             <router-link  to="/admin/data">
               <MenuItem name="1-5">
                 <Icon type="ios-cube" />
-                <span>信息统计</span>
+                <span>用户消费</span>
               </MenuItem>
             </router-link>
             <el-switch

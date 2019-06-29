@@ -24,14 +24,14 @@
       <Col span="12"><div class="md-wrapper">
         <router-link to="/admin/order">
         <Card class="ad-card">
-          订单管理<br>
+          图书销量<br>
           <Icon type="md-reorder" size="130" />
         </Card>
         </router-link>
       </div></Col>
       <Col span="12"><div class="md-wrapper">
         <router-link to="/admin/data">
-        <Card class="ad-card">信息统计<br>
+        <Card class="ad-card">用户消费<br>
           <Icon type="ios-cube" size="130" />
         </Card>
         </router-link>

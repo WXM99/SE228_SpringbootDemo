@@ -13,7 +13,7 @@
     <!--<Divider orientation="left" class="prop">关键字: {{keyword}}</Divider>-->
     <Card style="padding: 10px; margin: 30px" >
       <book-table :data_in="this.books_rec"></book-table>
-      <Page :total="100" style="margin-top: 10px"/>
+      <Page :total="10" style="margin-top: 10px"/>
     </Card>
     <Modal
       v-model="ad_modal"
@@ -130,9 +130,9 @@ export default {
     },
     handleSuccess (res, file) {
       // this.add_book.pic = file.url
-      // console.log(res)
+      console.log(res.path)
       // console.log(file)
-      this.add_book.cover_path = 'http://localhost:8080/' + res
+      this.add_book.cover_path = 'http://localhost:8080/' + res.path
       // document.querySelector('.el-upload.el-upload--picture-card').style = 'display: none'
     },
     handleRemove () {

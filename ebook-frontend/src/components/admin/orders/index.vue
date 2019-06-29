@@ -1,13 +1,13 @@
 <template>
   <div style="margin-top: 80px">
-    <p class="search-title">订单管理</p>
+    <p class="search-title">图书销量</p>
     <Row align="middle" style="margin-top: 20px">
       <Col span="12" offset="6"><Input search enter-button placeholder="输入ISBN" style="border-color:  #acc6aa" v-model="book_name" @on-search="search"/></Col>
     </Row>
     <!--<Divider orientation="left" class="prop">关键字: {{keyword}}</Divider>-->
     <Card style="padding: 10px; margin: 30px" >
       <order-table :data_in="this.books_orders"></order-table>
-      <Page :total="100" style="margin-top: 10px"/>
+      <Page :total="10" style="margin-top: 10px"/>
     </Card>
   </div>
 </template>
