@@ -126,9 +126,11 @@ export default {
             // console.log('API: /login/submit/\n', response)
             if (response.data.status === 200 && response.data.roles === '[USER]') {
               Cookies.set('login', 'USER', { expires: 1, path: '' })
+              Cookies.set('name', response.data.user)
               this.$router.push({path: '/'})
             } else if (response.data.status === 200 && response.data.roles === '[ROLE_ADMIN]') {
               Cookies.set('login', 'ADMIN', { expires: 1, path: '' })
+              Cookies.set('name', response.data.user)
               this.$router.push({path: '/admin'})
             } else {
               this.$axios({
