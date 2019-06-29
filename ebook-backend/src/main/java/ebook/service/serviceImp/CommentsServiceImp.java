@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class CommentsServiceImp implements CommentsService {
         String to_user = input.getString("to_whom");
         String content = input.getString("content");
         Reply nrly = new Reply(from_user, to_user, content);
+        nrly.time = new Date();
         to_whitch.floors.add(nrly);
         return this.commentsRepository.save(to_whitch);
     }
