@@ -44,9 +44,7 @@ export default {
 </script>
 <style>
   .ivu-card-body{
-    padding: 0px;
   }
   .ivu-card-head{
-    padding: 0px;
   }
 </style>

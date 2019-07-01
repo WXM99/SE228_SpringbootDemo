@@ -46,7 +46,7 @@
       <Row>
       <book-table :data_in="books_rec"></book-table>
       </Row>
-      <Page :total="100" style="margin-top: 10px"/>
+      <Page :total="10" style="margin-top: 10px"/>
     </Card>
   </div>
 </template>
@@ -172,7 +172,6 @@ export default {
     font-size: 30px;
   }
   .ivu-card-bordered{
-    border: 0px;
   }
   .avator-big{
     border-radius: 50%;

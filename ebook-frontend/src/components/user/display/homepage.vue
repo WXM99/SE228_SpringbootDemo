@@ -68,7 +68,6 @@ export default {
     font-size: 30px;
   }
   .ivu-card-bordered{
-    border: 0px;
   }
   .home-row{
     max-width: 1200px;

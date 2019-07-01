@@ -4,6 +4,13 @@
       <Row align="middle" style="margin-top: 20px">
         <Col span="12" offset="6"><Input search enter-button placeholder="用户名搜索" v-model="username" style="border-color:  #acc6aa" @on-search="search"/></Col>
       </Row>
+    <span style="font-size: 16px;padding: 20px">选择时间段: </span>
+    <DatePicker type="daterange"
+                placement="bottom-end"
+                placeholder="Select date"
+                style="width: 200px; margin-bottom:10px; margin-top: 30px;"
+                @on-change="timeFilter(time_span)"
+                v-model="time_span"></DatePicker>
     <Card style="padding: 10px; margin: 30px" >
       <order-table :data_in="this.books_orders"></order-table>
       <Page :total="10" style="margin-top: 10px"/>
@@ -30,13 +37,44 @@ export default {
         console.log('API response\n', response)
         this.books_orders = response.data
       })
+    },
+    timeFilter: function (timespan) {
+      console.log(timespan[0])
+      console.log(timespan[1])
+      if (timespan[0] !== '') {
+        this.$axios({
+          method: 'post',
+          url: '/admin/get_user_order_by_date',
+          data: {
+            'from': timespan[0],
+            'to': timespan[1],
+            'username': this.username
+          },
+          withCredentials: true
+        }).then(response => {
+          console.log('DATE\n', response)
+          this.books_orders = response.data
+        })
+      } else {
+        this.$axios({
+          method: 'post',
+          url: '/admin/get_user_order',
+          data: {
+            'username': this.username
+          },
+          withCredentials: true
+        }).then(response => {
+          console.log('API response\n', response)
+          this.books_orders = response.data
+        })
+      }
     }
   },
   mounted () {
   },
   data () {
     return {
-      date: ['2019/01/01', '2019/02/01'],
+      time_span: null,
       books_orders: [],
       username: ''
     }
@@ -80,12 +118,5 @@ export default {
   }
   .el-upload.el-upload--picture-card{
     margin-bottom: 20px;
-  }
-  .ivu-select-dropdown{
-    display: inline!important;
-    position: inherit!important;
-  }
-  .ivu-date-picker-rel{
-    display: none !important;
   }
 </style>

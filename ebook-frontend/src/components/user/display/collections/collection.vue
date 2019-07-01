@@ -49,6 +49,5 @@ export default {
     font-size: 30px;
   }
   .ivu-card-bordered{
-    border: 0px;
   }
 </style>
