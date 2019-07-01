@@ -111,7 +111,7 @@ export default {
       console.log('API response\n', response)
       this.myName = response.data.username
       if (response.data.avatar_path === 'none') {
-        this.myAvatar = 'https://i.loli.net/2017/08/21/599a521472424.jpg'
+        this.myAvatar = require('../../assets/avatar.jpg')
       } else {
         this.myAvatar = response.data.avatar_path
       }

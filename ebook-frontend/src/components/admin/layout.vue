@@ -82,7 +82,7 @@
               inactive-text="日间">
             </el-switch>
             <Tooltip placement="bottom" theme="light">
-              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" style="margin-left: -20px"/>
+              <Avatar :src="this.avatar" style="margin-left: -20px"/>
               <div slot="content">
                 <Row><p style="text-align: center; font-size: 25px;" class="user-info">欢迎你! 管理员</p></Row>
                 <router-link to="/user/login">
@@ -105,7 +105,8 @@ import Cookies from 'js-cookie'
 export default {
   data () {
     return {
-      isDark: false
+      isDark: false,
+      avatar: require('../../assets/avatar.jpg')
     }
   },
   methods: {

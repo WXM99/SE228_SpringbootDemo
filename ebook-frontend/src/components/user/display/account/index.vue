@@ -123,7 +123,7 @@ export default {
       this.myName = response.data.username
       this.myEmail = response.data.email
       if (response.data.avatar_path === 'none') {
-        this.myAvatar = 'https://i.loli.net/2017/08/21/599a521472424.jpg'
+        this.myAvatar = require('../../../../assets/avatar.jpg')
       } else {
         this.myAvatar = response.data.avatar_path
       }
