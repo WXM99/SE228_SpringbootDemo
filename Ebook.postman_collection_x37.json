@@ -1,0 +1,1142 @@
+{
+	"info": {
+		"_postman_id": "8b6438b2-c254-42ac-843d-38258b9d173e",
+		"name": "Ebook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ebook_admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ebook_admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"hello123\",\n\t\"email\": \"12122@qq.com\",\n\t\"password\": \"123\",\n\t\"avatar_path\": \"none\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find_a_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"hellohihi\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/find-a_user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"find-a_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_my_orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/get_my_orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_my_orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_orders_by_date",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/get_orders_by_date",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_orders_by_date"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_my_info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/get_my_info",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_my_info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_my_books_in_order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderid\": 7\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/get_my_books_in_order",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_my_books_in_order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "find_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500994\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/find_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"find_book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find_whole",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500999\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/find_whole_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"find_whole_book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500994,\n\t\"press\": \"上海交通大学出版社\",\n\t\"author_info\": \"詹妮弗·缔孚森是一位出色的小说家. 她的作品细腻生动, 充满了生命力!\",\n\t\"introduction\": \"主人公洪世贤是一家上市公司的CEO, 与自己的女友林品如...\",\n\t\"publish_time\": \"2019年3月\",\n\t\"tags\": [\"都市\", \"家庭\", \"复仇女王\"]\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/add_details",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add_details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500994\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/find_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"find_book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find_book_with_page",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"offset\": 0,\n\t\"limit\": 5\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/find_book_with_page",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"find_book_with_page"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_all_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/get_all_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_all_book"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "add_to_cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500999\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/add_to_cart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add_to_cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_from_cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500999\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/remove_from_cart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"remove_from_cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clear_cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/clear_cart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clear_cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ensure_payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/ensure_payment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ensure_payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/get_cart",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_cart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "statistics",
+					"item": [
+						{
+							"name": "get_user_order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"weixm\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/get_user_order",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"get_user_order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_user_order_by_date",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"admin\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/get_user_order",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"get_user_order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_book_order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"isbn\": 95500994\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/get_book_order",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"get_book_order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_book_order_by_date",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"isbn\": 95500994\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/get_book_order",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"get_book_order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_order_book",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"orderid\": 5\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/get_order_book",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"get_order_book"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search_user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"hello\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/admin/search_user",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"search_user"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ban_user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ebook_admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "hello",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"hello123\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/ban_user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"ban_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_page",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ebook_admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "hello",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"offset\": 0,\n\t\"limit\": 999\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/get_user_page",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"get_user_page"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "free_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"hellohi\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/free_user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"free_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 123123123\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/delete_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"delete_book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": \"123123123\",\n\t\"name\": \"test4\",\n\t\"price\": 24.98,\n\t\"inventory\": 2,\n\t\"author\": \"维克托·雨果\",\n\t\"cover_path\": \"http://localhost:8080/book3.jpg\",\n\t\"intro\": \"from postman\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/add_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"add_book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500994,\n\t\"name\": \"测试2\",\n\t\"price\": 24.98,\n\t\"inventory\": 1002,\n\t\"author\": \"devrloper\",\n\t\"cover_path\": \"http://localhost:8080/book2.jpg\",\n\t\"intro\": \"好看的一本书\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/admin/update_book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"update_book"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "img_upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "enctype",
+									"value": "multipart/form-data",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/img_upload",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"img_upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/jpeg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/aa1aed43-2c36-47b2-b8f3-3548ae237440.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aa1aed43-2c36-47b2-b8f3-3548ae237440.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "add_comments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500999,\n\t\"content\": \"很好看呢!\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/add_comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add_comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_reply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"5cfcbf0d88f5790f4c268bff\",\n\t\"content\": \"管理员有病吗？\",\n\t\"to_whom\": \"admin_2\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/add_reply",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add_reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_comments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\": 95500999\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/add_comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add_comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
