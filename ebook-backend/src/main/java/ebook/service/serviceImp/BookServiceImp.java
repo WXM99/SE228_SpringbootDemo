@@ -7,6 +7,7 @@ import ebook.model.outOfDB.WholeBook;
 import ebook.repository.BookDetailsRepository;
 import ebook.repository.BookRepository;
 import ebook.service.BookService;
+import java.rmi.RemoteException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class BookServiceImp implements BookService {
         }
     }
 
-    public WholeBook find(JSONObject input) {
+    public WholeBook find(JSONObject input) throws RemoteException {
         Long isbn = new Long((Integer)input.get("isbn"));
         WholeBook found = this.bookDao.find(isbn);
         if (found == null || found.bookInfoBrief.state == DELETED_BOOK) {

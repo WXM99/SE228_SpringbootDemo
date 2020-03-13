@@ -1,11 +1,12 @@
 package ebook.model;
 
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BOOK_BRIEF")
-public class BookInfoBrief {
+public class BookInfoBrief implements Serializable {
     @Id
     @Column(nullable = false, unique = true)
     // @GeneratedValue

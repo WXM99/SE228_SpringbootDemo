@@ -4,9 +4,10 @@ import ebook.model.BookDetails;
 import ebook.model.BookInfoBrief;
 import ebook.model.Comments;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WholeBook {
+public class WholeBook implements Serializable {
     public BookInfoBrief bookInfoBrief;
     public BookDetails bookDetails;
     public List<Comments> comments;
