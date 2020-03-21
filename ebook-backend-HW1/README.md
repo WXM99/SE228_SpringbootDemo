@@ -28,7 +28,11 @@
 
 - RMI 远程调用对象: ``BookDao``
 
-  修改diff: 
+- RMI Server: ``./src/main/java/ebook/dao/RmiServer.java``
+
+- RMI Client: ``./src/main/java/ebook/dao/RmiClient.java``
+
+- 完整工程及修改diff: 
 
   https://github.com/WXM99/SE228_SpringbootDemo/commit/ecb6295a0cd7bed4aefef5f9b9f61cb09de354ae
 
